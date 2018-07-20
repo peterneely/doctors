@@ -1,0 +1,51 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "plugins": [
+    "react",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "experimentalDecorators": true,
+      "jsx": true
+    }
+  },
+  "globals": {
+    "twttr": true,
+    "ga": true,
+    "fbq": true,
+    "mixpanel": true,
+    "Clipboard": true
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "all",
+        "bracketSpacing": true,
+        "jsxBracketSameLine": true
+      }
+    ],
+    "no-console": "warn",
+    "react/prop-types": "warn",
+    "react/jsx-key": "warn",
+    "react/no-string-refs":"warn",
+    "sort-keys": ["warn", "asc", {"caseSensitive": false, "natural": true}],
+    "alphabetical-destructuring": ["warn"],
+    "prefer-const":"warn"
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/react"
+  ]
+}
