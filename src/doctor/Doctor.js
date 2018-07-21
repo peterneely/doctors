@@ -13,7 +13,7 @@ class Doctor extends Component {
           },
         } = this.props;
         const doctor = doctorsById[id];
-        return !doctor ? null : <div>Doctor {doctor.name}</div>;
+        return !doctor ? null : <div>Doctor {doctor.name.first}</div>;
       },
     };
   })();

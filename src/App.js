@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Router, Switch } from 'react-router-dom';
-import history from './history';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import DoctorRoutes from './doctor/Routes';
+import history from './history';
+import theme from './theme';
 
 class App extends Component {
   render() {
     return (
       <Router history={history}>
-        <div>
+        <MuiThemeProvider theme={theme}>
           <Switch>
             <Redirect from="/" exact to="/doctors" />
             <DoctorRoutes />
             <Route component={() => 'Not Found'} />
           </Switch>
-        </div>
+        </MuiThemeProvider>
       </Router>
     );
   }

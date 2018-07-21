@@ -16,7 +16,7 @@ class ListItems extends Component {
       render: () => {
         const { itemsById } = this.props;
         return (
-          <div style={{ border: '1px solid grey' }}>
+          <div style={{ border: '1px solid grey', overflowY: 'scroll' }}>
             <List component="nav">
               {_.map(itemsById, (item, id) => {
                 return (
@@ -24,7 +24,7 @@ class ListItems extends Component {
                     <ListItemIcon>
                       <InboxIcon />
                     </ListItemIcon>
-                    <ListItemText primary={item.name} />
+                    <ListItemText primary={item.name.first} />
                   </ListItem>
                 );
               })}
