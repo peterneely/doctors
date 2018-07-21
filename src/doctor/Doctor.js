@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 class Doctor extends Component {
   content = (() => {
     return {
       render: () => {
-        return <div>Doctor</div>;
+        const { match = {} } = this.props;
+        const { params = {} } = match;
+        return <div>Doctor {params.id}</div>;
       },
     };
   })();
@@ -15,6 +17,8 @@ class Doctor extends Component {
   }
 }
 
-Doctor.propTypes = {};
+Doctor.propTypes = {
+  match: PropTypes.object.isRequired,
+};
 
 export default Doctor;

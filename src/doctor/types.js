@@ -1,0 +1,1 @@
+export const SET_DOCTOR_LIST = 'DOCTOR_SET_DOCTOR_LIST';

@@ -1,21 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import Doctor from './Doctor';
 import Doctors from './Doctors';
 import AddReview from './AddReview';
 import EditReview from './EditReview';
 
-const createRoutes = root => [
-  { path: `${root}/` },
-  { Component: Doctor, path: `${root}/:id` },
-  { Component: AddReview, path: `${root}/:id/add-review` },
-  { Component: EditReview, path: `${root}/:id/edit-review` },
+export const rootPath = '/doctors';
+
+const routes = [
+  { path: `${rootPath}/` },
+  { Component: Doctor, path: `${rootPath}/:id` },
+  { Component: AddReview, path: `${rootPath}/:id/add-review` },
+  { Component: EditReview, path: `${rootPath}/:id/edit-review` },
 ];
 
-const DoctorRouter = ({ root = '' }) => (
+const DoctorRouter = () => (
   <div>
-    {createRoutes(root).map(({ Component = () => null, path }) => (
+    {routes.map(({ Component = () => null, path }) => (
       <Route
         exact
         key={path}
@@ -29,9 +30,5 @@ const DoctorRouter = ({ root = '' }) => (
     ))}
   </div>
 );
-
-DoctorRouter.propTypes = {
-  root: PropTypes.string,
-};
 
 export default DoctorRouter;
