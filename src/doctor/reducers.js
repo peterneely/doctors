@@ -1,4 +1,3 @@
-// import _ from 'lodash';
 import initialState from './initialState';
 import * as types from './types';
 

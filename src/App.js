@@ -13,7 +13,7 @@ class App extends Component {
           <Switch>
             <Redirect from="/" exact to="/doctors" />
             <DoctorRoutes />
-            <Route component={() => 'Not Found'} />
+            <Route component={() => 'Uh oh'} />
           </Switch>
         </MuiThemeProvider>
       </Router>

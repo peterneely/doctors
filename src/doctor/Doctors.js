@@ -11,17 +11,28 @@ import { rootPath } from './Routes';
 class Doctors extends Component {
   constructor(props) {
     super(props);
-    this.props.actions.getDoctors();
+    props.actions.getDoctors();
   }
 
   content = (() => {
+    const handleSearch = event => {};
     const handleSelectDoctor = id => history.push(`${rootPath}/${id}`);
+    const styles = {
+      containerStyle: {
+        margin: '0 auto',
+        maxWidth: 1440,
+      },
+    };
     return {
       render: () => {
         const { children, doctorsById = {} } = this.props;
         return (
-          <div>
-            <ListItemSearch />
+          <div style={styles.containerStyle}>
+            <ListItemSearch
+              onSearch={handleSearch}
+              placeholder="Search doctors by name"
+              title="Doctors"
+            />
             <div style={{ display: 'flex' }}>
               <ListItems
                 itemsById={doctorsById}
