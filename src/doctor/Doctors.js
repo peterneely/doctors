@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-// import DoctorRouter from './DoctorRouter';
+import PropTypes from 'prop-types';
+import ListItemSearch from '../common/ListItemSearch';
+import ListItems from '../common/ListItems';
 
 class Doctors extends Component {
   content = (() => {
     return {
       render: () => {
-        return <div>Doctors</div>;
+        const { children } = this.props;
+        return (
+          <div>
+            <ListItemSearch />
+            <div>
+              <ListItems />
+              {children}
+            </div>
+          </div>
+        );
       },
     };
   })();
@@ -16,6 +26,8 @@ class Doctors extends Component {
   }
 }
 
-Doctors.propTypes = {};
+Doctors.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default Doctors;
