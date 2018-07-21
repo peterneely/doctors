@@ -6,7 +6,6 @@ import {
   Switch,
 } from 'react-router-dom';
 import DoctorRoutes from './doctor/Routes';
-import NotFound from './common/NotFound';
 
 class App extends Component {
   render() {
@@ -16,7 +15,7 @@ class App extends Component {
           <Switch>
             <Redirect from="/" exact to="/doctors" />
             <DoctorRoutes root="/doctors" />
-            <Route component={NotFound} />
+            <Route component={() => 'Not Found'} />
           </Switch>
         </div>
       </Router>
