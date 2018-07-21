@@ -6,7 +6,7 @@ export default function reduce(state = initialState, action) {
   const { payload, type } = action;
   switch (type) {
     case types.SET_DOCTOR_LIST:
-      return { ...state, list: payload };
+      return { ...state, doctorsById: payload };
     default:
       return state;
   }

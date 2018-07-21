@@ -15,15 +15,18 @@ class Doctors extends Component {
   }
 
   content = (() => {
-    const handleSelectDoctor = ({ id }) => history.push(`${rootPath}/${id}`);
+    const handleSelectDoctor = id => history.push(`${rootPath}/${id}`);
     return {
       render: () => {
-        const { children, doctorList = [] } = this.props;
+        const { children, doctorsById = {} } = this.props;
         return (
           <div>
             <ListItemSearch />
             <div style={{ display: 'flex' }}>
-              <ListItems items={doctorList} onClickItem={handleSelectDoctor} />
+              <ListItems
+                itemsById={doctorsById}
+                onClickItem={handleSelectDoctor}
+              />
               <div>{children}</div>
             </div>
           </div>
@@ -40,14 +43,14 @@ class Doctors extends Component {
 Doctors.propTypes = {
   actions: PropTypes.object,
   children: PropTypes.node.isRequired,
-  doctorList: PropTypes.arrayOf(PropTypes.object),
+  doctorsById: PropTypes.object,
 };
 
 const mapStateToProps = state => {
   const {
-    doctor: { list: doctorList },
+    doctor: { doctorsById },
   } = state;
-  return { doctorList };
+  return { doctorsById };
 };
 
 const mapDispatchToProps = dispatch => {

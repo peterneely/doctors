@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class Doctor extends Component {
   content = (() => {
     return {
       render: () => {
-        const { match = {} } = this.props;
-        const { params = {} } = match;
-        return <div>Doctor {params.id}</div>;
+        const {
+          doctorsById,
+          match: {
+            params: { id },
+          },
+        } = this.props;
+        const doctor = doctorsById[id];
+        return !doctor ? null : <div>Doctor {doctor.name}</div>;
       },
     };
   })();
@@ -18,7 +24,15 @@ class Doctor extends Component {
 }
 
 Doctor.propTypes = {
+  doctorsById: PropTypes.object,
   match: PropTypes.object.isRequired,
 };
 
-export default Doctor;
+const mapStateToProps = state => {
+  const {
+    doctor: { doctorsById },
+  } = state;
+  return { doctorsById };
+};
+
+export default connect(mapStateToProps)(Doctor);
