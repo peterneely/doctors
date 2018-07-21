@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
-class Main extends Component {
+class Doctor extends Component {
   content = (() => {
     return {
       render: () => {
-        return <div>Main</div>;
+        return <div>Doctor</div>;
       },
     };
   })();
@@ -15,8 +15,6 @@ class Main extends Component {
   }
 }
 
-// Main.propTypes = {
+Doctor.propTypes = {};
 
-// };
-
-export default Main;
+export default Doctor;
