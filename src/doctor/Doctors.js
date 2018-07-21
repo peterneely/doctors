@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './actions';
+import DoctorListItem from './DoctorListItem';
 import ListItemSearch from '../layout/ListItemSearch';
 import ListItems from '../layout/ListItems';
 import history from '../history';
+import { doctors as styles } from './styles';
 import { rootPath } from './Routes';
 
 class Doctors extends Component {
@@ -14,40 +16,29 @@ class Doctors extends Component {
     props.actions.getDoctors();
   }
 
-  content = (() => {
-    const handleSearch = event => {};
-    const handleSelectDoctor = id => history.push(`${rootPath}/${id}`);
-    const styles = {
-      containerStyle: {
-        margin: '0 auto',
-        maxWidth: 1440,
-      },
-    };
-    return {
-      render: () => {
-        const { children, doctorsById = {} } = this.props;
-        return (
-          <div style={styles.containerStyle}>
-            <ListItemSearch
-              onSearch={handleSearch}
-              placeholder="Search doctors by name"
-              title="Doctors"
-            />
-            <div style={{ display: 'flex' }}>
-              <ListItems
-                itemsById={doctorsById}
-                onClickItem={handleSelectDoctor}
-              />
-              <div>{children}</div>
-            </div>
-          </div>
-        );
-      },
-    };
-  })();
+  handleSearch = event => {};
+
+  handleSelectDoctor = ({ id }) => history.push(`${rootPath}/${id}`);
+
+  renderDoctor = doctor => (
+    <DoctorListItem doctor={doctor} onClick={this.handleSelectDoctor} />
+  );
 
   render() {
-    return this.content.render();
+    const { children, doctorsById = {} } = this.props;
+    return (
+      <div style={styles.container}>
+        <ListItemSearch
+          onSearch={this.handleSearch}
+          placeholder="Search doctors by name"
+          title="Doctors"
+        />
+        <div style={styles.contentContainer}>
+          <ListItems itemsById={doctorsById} renderItem={this.renderDoctor} />
+          <div>{children}</div>
+        </div>
+      </div>
+    );
   }
 }
 
