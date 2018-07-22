@@ -22,6 +22,14 @@ export const listItems = {
   container: { border: '1px solid grey', overflowY: 'scroll' },
 };
 
+export const masterDetail = {
+  container: {
+    margin: '0 auto',
+    maxWidth: 1440,
+  },
+  contentContainer: { display: 'flex' },
+};
+
 export const smallChip = color => ({
   backgroundColor: color,
   borderRadius: 3,

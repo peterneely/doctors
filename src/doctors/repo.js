@@ -6,5 +6,7 @@ import { getDoctorsConfig } from './repoConfig';
 export const getDoctors = () => {
   const { requestCount, toViewModel, url } = getDoctorsConfig;
   const promises = _.range(requestCount).map(() => get(url));
-  return Promise.all(promises).then(toViewModel);
+  return Promise.all(promises)
+    .then(toViewModel)
+    .catch(error => error);
 };

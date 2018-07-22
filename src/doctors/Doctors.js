@@ -4,12 +4,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as actions from './actions';
-import DoctorListItem from './DoctorListItem';
-import ListItemSearch from '../layout/ListItemSearch';
-import ListItems from '../layout/ListItems';
-import history from '../history';
-import { doctors as styles } from './styles';
-import { rootPath } from './Routes';
+import MasterDetail from '../layout/MasterDetail';
+import DoctorList from './DoctorList';
+import SearchListItems from '../layout/SearchListItems';
 
 class Doctors extends Component {
   constructor(props) {
@@ -17,45 +14,32 @@ class Doctors extends Component {
     props.actions.getDoctors();
   }
 
-  handleSearch = event => {};
-
-  handleSelectDoctor = ({ id }) => history.push(`${rootPath}/${id}`);
-
-  renderDoctor = doctor => (
-    <DoctorListItem
-      doctor={doctor}
-      key={doctor.id}
-      onClick={this.handleSelectDoctor}
-    />
-  );
-
   render() {
-    const { children, doctorsById = {} } = this.props;
+    const { children, doctorsById } = this.props;
     return (
-      <div style={styles.container}>
-        <ListItemSearch
-          onSearch={this.handleSearch}
-          placeholder="Search doctors by name"
-          title="Doctors"
-        />
-        <div style={styles.contentContainer}>
-          <ListItems itemsById={doctorsById} renderItem={this.renderDoctor} />
-          <div>{children}</div>
-        </div>
-      </div>
+      <MasterDetail
+        itemList={<DoctorList doctorsById={doctorsById} />}
+        search={
+          <SearchListItems
+            placeholder="Search doctors by name"
+            title="SearchDoctors"
+          />
+        }>
+        <div>{children}</div>
+      </MasterDetail>
     );
   }
 }
 
 Doctors.propTypes = {
-  actions: PropTypes.object,
+  actions: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
   doctorsById: PropTypes.object,
 };
 
 const mapStateToProps = state => {
   const {
-    doctors: { doctorsById },
+    doctors: { doctorsById = {} },
   } = state;
   return { doctorsById };
 };

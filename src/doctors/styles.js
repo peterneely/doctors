@@ -8,12 +8,15 @@ export const doctors = {
   contentContainer: { display: 'flex' },
 };
 
-export const doctorListItem = {
-  displayName: { color: colors.listItemTitle },
-  practiceType: { marginLeft: 6 },
-  text: {
+export const doctorListItem = (() => {
+  const text = {
     color: colors.listItemText,
     fontSize: '0.8em',
     fontWeight: 'lighter',
-  },
-};
+  };
+  return {
+    displayName: { color: colors.listItemTitle },
+    practiceType: { ...text, marginLeft: 6 },
+    text,
+  };
+})();

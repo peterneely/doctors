@@ -10,18 +10,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 // import * as actions from './actions';
-// import ListItemSearch from '../layout/ListItemSearch';
+// import SearchListItems from '../layout/SearchListItems';
 // import ListItems from '../layout/ListItems';
 // import history from '../history';
 // import { rootPath } from './Routes';
 import { doctorListItem as styles } from './styles';
 import SmallChip from '../layout/SmallChip';
-
-const chipTypesByRatingSummary = {
-  Fair: 'medium',
-  High: 'hot',
-  Low: 'cool',
-};
 
 class DoctorListItem extends Component {
   handleClick = doctor => () => {
@@ -32,25 +26,22 @@ class DoctorListItem extends Component {
   render() {
     const { doctor = {} } = this.props;
     const {
+      chipType,
+      displayName,
       id,
       location: { street },
-      name: { first: firstName, last: lastName },
       picture: { thumbnail } = {},
       practiceType,
       ratingSummary,
       reviewCount,
     } = doctor;
-    const displayName = `${firstName} ${lastName}`;
-    const chipType = chipTypesByRatingSummary[ratingSummary];
     return (
       <ListItem button key={id} onClick={this.handleClick(doctor)}>
         <Avatar alt={displayName} src={thumbnail} />
         <ListItemText>
           <div style={styles.displayName}>{displayName}</div>
           <SmallChip label={ratingSummary} type={chipType} />
-          <span style={{ ...styles.text, ...styles.practiceType }}>
-            {practiceType}
-          </span>
+          <span style={styles.practiceType}>{practiceType}</span>
           <div style={styles.text}>
             <div>{street}</div>
             <div>{`${reviewCount} Reviews`}</div>
