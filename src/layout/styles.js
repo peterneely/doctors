@@ -19,7 +19,12 @@ export const listItemSearch = {
 };
 
 export const listItems = {
-  container: { flex: 1, overflowY: 'scroll' },
+  container: height => ({
+    flex: 1,
+    height: height || 'auto',
+    overflowY: 'scroll',
+  }),
+  listContainer: { paddingTop: 0 },
 };
 
 export const masterDetail = {

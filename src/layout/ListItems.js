@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -6,6 +6,7 @@ import List from '@material-ui/core/List';
 import _ from 'lodash';
 
 import { listItems as styles } from './styles';
+import LayoutHeight from './LayoutHeight';
 
 class ListItems extends Component {
   componentDidUpdate(prevProps) {
@@ -26,22 +27,28 @@ class ListItems extends Component {
       match: { params = {} },
       setActiveItem = () => {},
     } = this.props;
-    if (params.id === prevActiveItem.id) return;
+    if (!_.size(itemsById) || params.id === prevActiveItem.id) return;
     setActiveItem(itemsById[params.id]);
   };
 
   render() {
-    const { renderItem } = this.props;
+    const { height, renderItem } = this.props;
     return (
-      <div style={styles.container}>
-        <List>{this.filterItems().map(renderItem)}</List>
-      </div>
+      <Fragment>
+        <LayoutHeight offset={100} />
+        <div style={styles.container(height)}>
+          <List style={styles.listContainer}>
+            {this.filterItems().map(renderItem)}
+          </List>
+        </div>
+      </Fragment>
     );
   }
 }
 
 ListItems.propTypes = {
   activeItem: PropTypes.object.isRequired,
+  height: PropTypes.number,
   itemsById: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   renderItem: PropTypes.func.isRequired,
@@ -51,10 +58,10 @@ ListItems.propTypes = {
 
 const mapStateToProps = state => {
   const {
-    layout: { searchTerms = '' },
+    layout: { height, searchTerms = '' },
     match = {},
   } = state;
-  return { match, searchTerms };
+  return { height, match, searchTerms };
 };
 
 export default connect(mapStateToProps)(withRouter(ListItems));

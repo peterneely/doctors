@@ -15,9 +15,17 @@ export const doctorListItem = (() => {
     fontWeight: 'lighter',
   };
   return {
+    arrowIcon: { color: colors.listItemTitle, height: 36, width: 36 },
+    bigAvatar: {
+      height: 60,
+      marginTop: 6,
+      width: 60,
+    },
     container: active => ({
+      alignItems: 'flex-start',
       backgroundColor: active ? colors.activeBackground : 'white',
       borderBottom: `1px solid ${colors.border}`,
+      display: 'flex',
     }),
     displayName: {
       color: colors.listItemTitle,
@@ -27,5 +35,6 @@ export const doctorListItem = (() => {
     },
     practiceType: { ...text, marginLeft: 6 },
     text,
+    textContainer: { margin: '5px 0 15px' },
   };
 })();

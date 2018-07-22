@@ -40,6 +40,7 @@ export const getDoctorsConfig = (() => {
   const extendDoctor = (doctor, index) => {
     const ratingSummary = random(ratingSummaries);
     const extended = {
+      avatar: doctor.picture.medium,
       chipType: chipTypesByRatingSummary[ratingSummary.toLowerCase()],
       displayName: createDisplayName(doctor),
       id: ids[index], // id value from randomuser can be null sometimes, so don't use it
