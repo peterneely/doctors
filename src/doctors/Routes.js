@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Route } from 'react-router-dom';
+
 import Doctor from './Doctor';
 import Doctors from './Doctors';
 import AddReview from './AddReview';
@@ -14,8 +15,8 @@ const routes = [
   { Component: EditReview, path: `${rootPath}/:id/edit-review` },
 ];
 
-const DoctorRouter = () => (
-  <div>
+const Routes = () => (
+  <Fragment>
     {routes.map(({ Component = () => null, path }) => (
       <Route
         exact
@@ -28,7 +29,7 @@ const DoctorRouter = () => (
         )}
       />
     ))}
-  </div>
+  </Fragment>
 );
 
-export default DoctorRouter;
+export default Routes;

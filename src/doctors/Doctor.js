@@ -30,7 +30,7 @@ Doctor.propTypes = {
 
 const mapStateToProps = state => {
   const {
-    doctor: { doctorsById },
+    doctors: { doctorsById },
   } = state;
   return { doctorsById };
 };

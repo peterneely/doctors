@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import _ from 'lodash';
+
 import { listItems as styles } from './styles';
 // import DraftsIcon from '@material-ui/icons/Drafts';
 

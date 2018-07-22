@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import doctor from '../doctor/reducers';
+import doctors from '../doctors/reducers';
 
 export default combineReducers({
-  doctor,
+  doctors,
 });

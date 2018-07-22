@@ -1,11 +1,25 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-// import indigo from '@material-ui/core/colors/indigo';
-// import pink from '@material-ui/core/colors/pink';
 
-export default createMuiTheme({
+const colorCodes = {
+  grey: '#AAAAAA',
+  pink: '#FB646B',
+  teal: '#64C5AF',
+};
+
+export const colors = {
+  cool: colorCodes.grey,
+  hot: colorCodes.pink,
+  listItemText: colorCodes.grey,
+  listItemTitle: colorCodes.teal,
+  medium: colorCodes.teal,
+};
+
+export const overrides = {
   palette: {
     primary: {
-      main: '#64C5AF',
+      main: colorCodes.teal,
     },
   },
-});
+};
+
+export default createMuiTheme(overrides);

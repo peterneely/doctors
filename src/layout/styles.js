@@ -21,3 +21,12 @@ export const listItemSearch = {
 export const listItems = {
   container: { border: '1px solid grey', overflowY: 'scroll' },
 };
+
+export const smallChip = color => ({
+  backgroundColor: color,
+  borderRadius: 3,
+  color: 'white',
+  fontSize: '0.8em',
+  fontWeight: 'lighter',
+  padding: '2px 8px',
+});

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
+
 import './list-item-search.css';
 import { listItemSearch as styles } from './styles';
 

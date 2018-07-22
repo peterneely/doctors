@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
 import * as actions from './actions';
 import DoctorListItem from './DoctorListItem';
 import ListItemSearch from '../layout/ListItemSearch';
@@ -21,7 +22,11 @@ class Doctors extends Component {
   handleSelectDoctor = ({ id }) => history.push(`${rootPath}/${id}`);
 
   renderDoctor = doctor => (
-    <DoctorListItem doctor={doctor} onClick={this.handleSelectDoctor} />
+    <DoctorListItem
+      doctor={doctor}
+      key={doctor.id}
+      onClick={this.handleSelectDoctor}
+    />
   );
 
   render() {
@@ -50,7 +55,7 @@ Doctors.propTypes = {
 
 const mapStateToProps = state => {
   const {
-    doctor: { doctorsById },
+    doctors: { doctorsById },
   } = state;
   return { doctorsById };
 };
