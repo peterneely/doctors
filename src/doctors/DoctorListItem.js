@@ -17,6 +17,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { doctorListItem as styles } from './styles';
 import SmallChip from '../layout/SmallChip';
 
+const chipTypesByRatingSummary = {
+  Fair: 'medium',
+  High: 'hot',
+  Low: 'cool',
+};
+
 class DoctorListItem extends Component {
   handleClick = doctor => () => {
     const { onClick } = this.props;
@@ -27,19 +33,28 @@ class DoctorListItem extends Component {
     const { doctor = {} } = this.props;
     const {
       id,
+      location: { street },
       name: { first: firstName, last: lastName },
       picture: { thumbnail } = {},
+      practiceType,
+      ratingSummary,
+      reviewCount,
     } = doctor;
     const displayName = `${firstName} ${lastName}`;
+    const chipType = chipTypesByRatingSummary[ratingSummary];
     return (
       <ListItem button key={id} onClick={this.handleClick(doctor)}>
         <Avatar alt={displayName} src={thumbnail} />
         <ListItemText>
           <div style={styles.displayName}>{displayName}</div>
-          <SmallChip label="High" type="hot" />
+          <SmallChip label={ratingSummary} type={chipType} />
           <span style={{ ...styles.text, ...styles.practiceType }}>
-            Internal Medicine
+            {practiceType}
           </span>
+          <div style={styles.text}>
+            <div>{street}</div>
+            <div>{`${reviewCount} Reviews`}</div>
+          </div>
         </ListItemText>
         {/* <ListItemSecondaryAction>
           <Checkbox

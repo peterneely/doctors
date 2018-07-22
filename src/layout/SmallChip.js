@@ -11,7 +11,7 @@ const SmallChip = ({ label, type }) => {
 
 SmallChip.propTypes = {
   label: PropTypes.string.isRequired,
-  type: PropTypes.string,
+  type: PropTypes.string, // cool, medium, or hot
 };
 
 export default SmallChip;

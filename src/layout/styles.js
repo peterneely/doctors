@@ -15,7 +15,7 @@ export const listItemSearch = {
     display: 'flex',
     width: '100%',
   },
-  title: { color: 'white', fontSize: '2.5em', fontWeight: 'lighter' },
+  title: { color: 'white', fontSize: '2.5em' },
 };
 
 export const listItems = {
