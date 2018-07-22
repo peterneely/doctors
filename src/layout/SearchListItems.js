@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Input from '@material-ui/core/Input';
+import SearchIcon from '@material-ui/icons/Search';
 
 import './search-list-items.css';
 import * as actions from './actions';
-import { listItemSearch as styles } from './styles';
+import { searchListItems as styles } from './styles';
 
 const SearchListItems = props => {
   const { actions = {}, placeholder = '', searchTerms, title } = props;
@@ -16,9 +17,10 @@ const SearchListItems = props => {
     <div style={styles.container}>
       <div style={styles.title}>{title}</div>
       <div style={styles.inputContainer}>
-        <span />
+        <SearchIcon style={styles.icon} />
         <Input
           className="search-input"
+          disableUnderline
           onChange={handleSearch}
           placeholder={placeholder}
           style={styles.input}

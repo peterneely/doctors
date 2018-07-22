@@ -1,4 +1,13 @@
-import { colors } from '../theme';
+import { borders, colors } from '../theme';
+
+export const doctor = {
+  container: (height = 'auto') => ({
+    borderLeft: borders.default,
+    height,
+    overflowY: 'scroll',
+  }),
+  contentContainer: { display: 'flex' },
+};
 
 export const doctors = {
   container: {
@@ -24,7 +33,7 @@ export const doctorListItem = (() => {
     container: active => ({
       alignItems: 'flex-start',
       backgroundColor: active ? colors.activeBackground : 'white',
-      borderBottom: `1px solid ${colors.border}`,
+      borderBottom: borders.default,
       display: 'flex',
     }),
     displayName: {

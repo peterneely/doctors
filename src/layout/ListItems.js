@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -6,7 +6,6 @@ import List from '@material-ui/core/List';
 import _ from 'lodash';
 
 import { listItems as styles } from './styles';
-import LayoutHeight from './LayoutHeight';
 
 class ListItems extends Component {
   componentDidUpdate(prevProps) {
@@ -34,14 +33,11 @@ class ListItems extends Component {
   render() {
     const { height, renderItem } = this.props;
     return (
-      <Fragment>
-        <LayoutHeight offset={100} />
-        <div style={styles.container(height)}>
-          <List style={styles.listContainer}>
-            {this.filterItems().map(renderItem)}
-          </List>
-        </div>
-      </Fragment>
+      <div style={styles.container(height)}>
+        <List style={styles.listContainer}>
+          {this.filterItems().map(renderItem)}
+        </List>
+      </div>
     );
   }
 }
