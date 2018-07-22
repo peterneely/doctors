@@ -1,8 +1,9 @@
 import changeCase from 'change-case';
-import createId from 'uuid/v1';
 import _ from 'lodash';
 
 export const getDoctorsConfig = (() => {
+  const requestCount = 15; // randomuser's free api only returns 1 record per call
+  const ids = _.range(requestCount).map(number => (number + 1).toString());
   const chipTypesByRatingSummary = {
     fair: 'medium',
     high: 'hot',
@@ -36,12 +37,12 @@ export const getDoctorsConfig = (() => {
       .trim()
       .toLowerCase();
   };
-  const extendDoctor = doctor => {
+  const extendDoctor = (doctor, index) => {
     const ratingSummary = random(ratingSummaries);
     const extended = {
       chipType: chipTypesByRatingSummary[ratingSummary.toLowerCase()],
       displayName: createDisplayName(doctor),
-      id: createId(), // id value from randomuser can be null sometimes, so don't use it
+      id: ids[index], // id value from randomuser can be null sometimes, so don't use it
       practiceType: random(practiceTypes),
       ratingSummary,
       reviewCount: _.random(100, 200),
@@ -54,13 +55,13 @@ export const getDoctorsConfig = (() => {
     return collection[randomIndex];
   };
   return {
-    requestCount: 15, // randomuser's free api only returns 1 record per call
+    requestCount,
     toViewModel: results =>
       results
-        .map(
-          ({ data: { results = [] } = {} }) =>
-            results.length ? extendDoctor(results[0]) : null,
-        )
+        .map((result, index) => {
+          const { data: { results = [] } = {} } = result;
+          return results.length ? extendDoctor(results[0], index) : null;
+        })
         .filter(item => item),
     url: 'https://randomuser.me/api/', // alternative, but no avatars: 'https://jsonplaceholder.typicode.com/users'
   };

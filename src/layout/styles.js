@@ -19,7 +19,7 @@ export const listItemSearch = {
 };
 
 export const listItems = {
-  container: { border: '1px solid grey', overflowY: 'scroll' },
+  container: { flex: 1, overflowY: 'scroll' },
 };
 
 export const masterDetail = {
@@ -28,6 +28,7 @@ export const masterDetail = {
     maxWidth: 1440,
   },
   contentContainer: { display: 'flex' },
+  detailContainer: { flex: 2 },
 };
 
 export const smallChip = color => ({

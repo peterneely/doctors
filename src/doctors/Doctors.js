@@ -15,14 +15,21 @@ class Doctors extends Component {
   }
 
   render() {
-    const { children, doctorsById } = this.props;
+    const { actions = {}, activeDoctor, children, doctorsById } = this.props;
+    const { setActiveDoctor = () => {} } = actions;
     return (
       <MasterDetail
-        itemList={<DoctorList doctorsById={doctorsById} />}
+        listItems={
+          <DoctorList
+            activeDoctor={activeDoctor}
+            doctorsById={doctorsById}
+            setActiveDoctor={setActiveDoctor}
+          />
+        }
         search={
           <SearchListItems
             placeholder="Search doctors by name"
-            title="SearchDoctors"
+            title="Doctors"
           />
         }>
         <div>{children}</div>
@@ -33,15 +40,16 @@ class Doctors extends Component {
 
 Doctors.propTypes = {
   actions: PropTypes.object.isRequired,
+  activeDoctor: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
   doctorsById: PropTypes.object,
 };
 
 const mapStateToProps = state => {
   const {
-    doctors: { doctorsById = {} },
+    doctors: { activeDoctor = {}, doctorsById = {} },
   } = state;
-  return { doctorsById };
+  return { activeDoctor, doctorsById };
 };
 
 const mapDispatchToProps = dispatch => {

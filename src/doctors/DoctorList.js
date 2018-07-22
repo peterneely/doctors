@@ -7,29 +7,40 @@ import history from '../history';
 import { rootPath } from './Routes';
 
 class DoctorList extends Component {
-  handleSelectDoctor = ({ id }) => history.push(`${rootPath}/${id}`);
+  handleSelectDoctor = doctor => {
+    this.props.setActiveDoctor(doctor);
+    history.push(`${rootPath}/${doctor.id}`);
+  };
 
-  renderDoctorListItem = doctor => (
-    <DoctorListItem
-      doctor={doctor}
-      key={doctor.id}
-      onClick={this.handleSelectDoctor}
-    />
-  );
+  renderDoctorListItem = doctor => {
+    const { activeDoctor } = this.props;
+    return (
+      <DoctorListItem
+        active={doctor.id === activeDoctor.id}
+        doctor={doctor}
+        key={doctor.id}
+        onClick={this.handleSelectDoctor}
+      />
+    );
+  };
 
   render() {
-    const { doctorsById } = this.props;
+    const { activeDoctor, doctorsById, setActiveDoctor } = this.props;
     return (
       <ListItems
+        activeItem={activeDoctor}
         itemsById={doctorsById}
         renderItem={this.renderDoctorListItem}
+        setActiveItem={setActiveDoctor}
       />
     );
   }
 }
 
 DoctorList.propTypes = {
+  activeDoctor: PropTypes.object.isRequired,
   doctorsById: PropTypes.object,
+  setActiveDoctor: PropTypes.func.isRequired,
 };
 
 export default DoctorList;

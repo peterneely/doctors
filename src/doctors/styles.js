@@ -11,11 +11,20 @@ export const doctors = {
 export const doctorListItem = (() => {
   const text = {
     color: colors.listItemText,
-    fontSize: '0.8em',
+    fontSize: '0.9em',
     fontWeight: 'lighter',
   };
   return {
-    displayName: { color: colors.listItemTitle },
+    container: active => ({
+      backgroundColor: active ? colors.activeBackground : 'white',
+      borderBottom: `1px solid ${colors.border}`,
+    }),
+    displayName: {
+      color: colors.listItemTitle,
+      fontSize: '1.2em',
+      fontWeight: 'lighter',
+      marginBottom: 2,
+    },
     practiceType: { ...text, marginLeft: 6 },
     text,
   };

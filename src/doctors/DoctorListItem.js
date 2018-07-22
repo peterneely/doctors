@@ -24,7 +24,7 @@ class DoctorListItem extends Component {
   };
 
   render() {
-    const { doctor = {} } = this.props;
+    const { active, doctor = {} } = this.props;
     const {
       chipType,
       displayName,
@@ -36,7 +36,11 @@ class DoctorListItem extends Component {
       reviewCount,
     } = doctor;
     return (
-      <ListItem button key={id} onClick={this.handleClick(doctor)}>
+      <ListItem
+        button
+        key={id}
+        onClick={this.handleClick(doctor)}
+        style={styles.container(active)}>
         <Avatar alt={displayName} src={thumbnail} />
         <ListItemText>
           <div style={styles.displayName}>{displayName}</div>
@@ -59,6 +63,7 @@ class DoctorListItem extends Component {
 }
 
 DoctorListItem.propTypes = {
+  active: PropTypes.bool.isRequired,
   doctor: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
 };

@@ -4,16 +4,19 @@ import * as types from './types';
 import { setMessage } from '../layout/actions';
 
 export const getDoctors = () => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const { doctors: { success = false } = {} } = getState();
+    if (success) return;
     repo
       .getDoctors()
       .then(doctors => {
         dispatch({
           payload: _.keyBy(doctors, ({ id }) => id),
-          type: types.SET_DOCTORS_BY_ID,
+          type: types.SET_DOCTORS_BY_ID_SUCCESS,
         });
       })
       .catch(error => {
+        dispatch({ type: types.SET_DOCTORS_BY_ID_FAIL });
         dispatch(
           setMessage({
             details: error,
@@ -25,3 +28,8 @@ export const getDoctors = () => {
       });
   };
 };
+
+export const setActiveDoctor = doctor => ({
+  payload: doctor,
+  type: types.SET_ACTIVE_DOCTOR,
+});

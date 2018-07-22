@@ -5,13 +5,13 @@ import AlertMessage from './AlertMessage';
 import { masterDetail as styles } from './styles';
 
 const MasterDetail = props => {
-  const { children, itemList: ItemList, search: Search } = props;
+  const { children, listItems: ListItems, search: Search } = props;
   return (
     <div style={styles.container}>
       {Search}
       <div style={styles.contentContainer}>
-        {ItemList}
-        <div>{children}</div>
+        {ListItems}
+        <div style={styles.detailContainer}>{children}</div>
       </div>
       <AlertMessage />
     </div>
@@ -20,7 +20,7 @@ const MasterDetail = props => {
 
 MasterDetail.propTypes = {
   children: PropTypes.node.isRequired,
-  itemList: PropTypes.node.isRequired,
+  listItems: PropTypes.node.isRequired,
   search: PropTypes.node.isRequired,
 };
 
