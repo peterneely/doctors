@@ -4,14 +4,13 @@ import _ from 'lodash';
 
 import DoctorListItem from './DoctorListItem';
 import ListItems from '../layout/ListItems';
-import history from '../history';
-import { rootPath } from './Routes';
 import { doctorListItems as styles } from './styles';
+import { go } from './Routes';
 
 class DoctorListItems extends Component {
   handleSelectDoctor = doctor => {
     this.props.setActiveDoctor(doctor);
-    history.push(`${rootPath}/${doctor.id}`);
+    go(`/${doctor.id}`);
   };
 
   renderDoctorListItem = doctor => {
@@ -27,12 +26,17 @@ class DoctorListItems extends Component {
   };
 
   render() {
-    const { activeDoctor, doctorsById, match, setActiveDoctor } = this.props;
-    const { params } = match;
-    const showRightBorder = !!_.size(doctorsById) && !params.id;
+    const {
+      activeDoctor,
+      doctorsById,
+      hasDetail,
+      setActiveDoctor,
+    } = this.props;
+    const showRightBorder = !!_.size(doctorsById) && !hasDetail();
     return (
       <ListItems
         activeItem={activeDoctor}
+        idParamProp="doctorId"
         itemsById={doctorsById}
         renderItem={this.renderDoctorListItem}
         setActiveItem={setActiveDoctor}
@@ -45,7 +49,7 @@ class DoctorListItems extends Component {
 DoctorListItems.propTypes = {
   activeDoctor: PropTypes.object.isRequired,
   doctorsById: PropTypes.object,
-  match: PropTypes.object.isRequired,
+  hasDetail: PropTypes.func.isRequired,
   setActiveDoctor: PropTypes.func.isRequired,
 };
 

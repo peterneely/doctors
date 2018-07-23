@@ -110,7 +110,7 @@ export const doctorListItems = {
 };
 
 export const reviewListItem = {
-  author: { flex: 10, fontWeight: 'bold', margin: '15px 0' },
+  author: { fontWeight: 'bold', margin: '15px 0' },
   authorContainer: {
     alignItems: 'flex-start',
     display: 'flex',
@@ -123,20 +123,16 @@ export const reviewListItem = {
     lineHeight: '1.6em',
     margin: '4px 0',
   },
+  button: {
+    color: colors.listItemTitle,
+    fontSize: '0.8em',
+    fontWeight: 'lighter',
+  },
   container: { borderBottom: borders.default, padding: 20 },
   date: {
     color: colors.listItemText,
     fontSize: '0.8em',
     fontWeight: 'lighter',
-  },
-  edit: {
-    color: colors.listItemTitle,
-    cursor: 'pointer',
-    flex: 1,
-    fontSize: '0.8em',
-    fontWeight: 'lighter',
-    padding: '15px 0 15px 15px',
-    textAlign: 'right',
   },
 };
 

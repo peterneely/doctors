@@ -14,14 +14,13 @@ class Doctors extends Component {
     props.actions.getDoctors();
   }
 
+  hasDetail = () => {
+    const { params } = this.props.match;
+    return !!params.doctorId;
+  };
+
   render() {
-    const {
-      actions = {},
-      activeDoctor,
-      children,
-      doctorsById,
-      match,
-    } = this.props;
+    const { actions = {}, activeDoctor, children, doctorsById } = this.props;
     const { setActiveDoctor = () => {} } = actions;
     return (
       <Fragment>
@@ -30,7 +29,7 @@ class Doctors extends Component {
             <DoctorListItems
               activeDoctor={activeDoctor}
               doctorsById={doctorsById}
-              match={match}
+              hasDetail={this.hasDetail}
               setActiveDoctor={setActiveDoctor}
             />
           }

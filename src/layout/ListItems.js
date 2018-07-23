@@ -20,14 +20,15 @@ class ListItems extends Component {
   };
 
   trySetActiveItem = () => {
-    const { activeItem = {} } = this.props;
+    const { activeItem = {}, idParamProp } = this.props;
     const {
       itemsById,
       match: { params = {} },
       setActiveItem = () => {},
     } = this.props;
-    if (!_.size(itemsById) || params.id === activeItem.id) return;
-    setActiveItem(itemsById[params.id]);
+    const paramId = params[idParamProp];
+    if (!_.size(itemsById) || paramId === activeItem.id) return;
+    setActiveItem(itemsById[paramId]);
   };
 
   render() {
@@ -45,6 +46,7 @@ class ListItems extends Component {
 ListItems.propTypes = {
   activeItem: PropTypes.object.isRequired,
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  idParamProp: PropTypes.string.isRequired,
   itemsById: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   renderItem: PropTypes.func.isRequired,

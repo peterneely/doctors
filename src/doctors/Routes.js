@@ -5,14 +5,15 @@ import Doctor from './Doctor';
 import Doctors from './Doctors';
 import AddReview from './AddReview';
 import EditReview from './EditReview';
+import history from '../history';
 
 export const rootPath = '/doctors';
 
 const routes = [
   { path: `${rootPath}/` },
-  { Component: Doctor, path: `${rootPath}/:id` },
-  { Component: AddReview, path: `${rootPath}/:id/add-review` },
-  { Component: EditReview, path: `${rootPath}/:id/edit-review` },
+  { Component: Doctor, path: `${rootPath}/:doctorId` },
+  { Component: EditReview, path: `${rootPath}/:doctorId/reviews/:reviewId` },
+  { Component: AddReview, path: `${rootPath}/:doctorId/add-review` },
 ];
 
 const Routes = () => (
@@ -33,3 +34,7 @@ const Routes = () => (
 );
 
 export default Routes;
+
+export const go = path => {
+  history.push(`${rootPath}${path}`);
+};

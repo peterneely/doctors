@@ -15,7 +15,11 @@ class ReviewListItems extends Component {
   };
 
   render() {
-    const { classes, reviewsById = {} } = this.props;
+    const {
+      classes,
+      onEditReview: handleEditReview,
+      reviewsById = {},
+    } = this.props;
     const height = this.getContainerHeight();
     const reviews = _.chain(reviewsById)
       .map()
@@ -26,7 +30,11 @@ class ReviewListItems extends Component {
       <div style={styles.container}>
         <div style={styles.reviewsContainer(height)}>
           {reviews.map(review => (
-            <ReviewListItem key={review.id} review={review} />
+            <ReviewListItem
+              key={review.id}
+              review={review}
+              onEdit={handleEditReview}
+            />
           ))}
         </div>
         <div style={styles.commandContainer}>
@@ -50,6 +58,7 @@ ReviewListItems.propTypes = {
   classes: PropTypes.object.isRequired,
   headerHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   layoutHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  onEditReview: PropTypes.func.isRequired,
   reviewsById: PropTypes.object.isRequired,
 };
 

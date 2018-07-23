@@ -11,22 +11,20 @@ import _ from 'lodash';
 import { doctorHeader as styles } from './styles';
 
 class DoctorHeader extends Component {
-  componentDidMount() {
-    this.trySetHeight();
+  componentDidUpdate() {
+    this.setHeight();
   }
 
-  componentDidUpdate() {
-    this.trySetHeight();
-  }
+  setHeight = () => {
+    if (!this.headerEl) return;
+    const { setHeight = () => {} } = this.props;
+    setHeight(this.headerEl.clientHeight);
+  };
 
   setRef = ref => {
     if (!ref) return;
     this.headerEl = ref;
-  };
-
-  trySetHeight = () => {
-    const { setHeight = () => {} } = this.props;
-    if (this.headerEl) setHeight(this.headerEl.clientHeight);
+    this.setHeight();
   };
 
   render() {
