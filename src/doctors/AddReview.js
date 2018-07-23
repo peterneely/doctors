@@ -1,20 +1,10 @@
-import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import React from 'react';
 
-class AddReview extends Component {
-  content = (() => {
-    return {
-      render: () => {
-        return <div>AddReview</div>;
-      },
-    };
-  })();
+import Doctor from './Doctor';
+import Review from './Review';
 
-  render() {
-    return this.content.render();
-  }
-}
-
-AddReview.propTypes = {};
+const AddReview = () => (
+  <Doctor>{({ goToReviews }) => <Review onCancel={goToReviews} />}</Doctor>
+);
 
 export default AddReview;

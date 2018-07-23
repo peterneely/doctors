@@ -13,6 +13,7 @@ class ReviewListItems extends Component {
     const {
       classes,
       contentHeight,
+      onAddReview: handleAddReview,
       onEditReview: handleEditReview,
       reviewsById = {},
     } = this.props;
@@ -37,6 +38,7 @@ class ReviewListItems extends Component {
             aria-label="Leave review"
             className={classes.button}
             fullWidth
+            onClick={handleAddReview}
             style={styles.reviewButton}
             variant="contained">
             <span style={styles.reviewButtonLabel}>Leave review</span>
@@ -52,6 +54,7 @@ class ReviewListItems extends Component {
 ReviewListItems.propTypes = {
   classes: PropTypes.object.isRequired,
   contentHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  onAddReview: PropTypes.func.isRequired,
   onEditReview: PropTypes.func.isRequired,
   reviewsById: PropTypes.object.isRequired,
 };

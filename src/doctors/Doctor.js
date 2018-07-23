@@ -19,28 +19,39 @@ class Doctor extends Component {
     return _.isNumber(layoutHeight) ? layoutHeight - headerHeight : 'auto';
   };
 
-  goToDetail = path => {
-    const { params } = this.props.match;
-    go(`/${params.doctorId}${path}`);
-  };
-
   setHeaderHeight = headerHeight => {
     const { headerHeight: prevHeight } = this.state;
     if (headerHeight !== prevHeight) this.setState({ headerHeight });
   };
 
   render() {
-    const { children, doctor, reviewsById } = this.props;
+    const {
+      children,
+      doctor,
+      match: { params },
+      reviewsById,
+    } = this.props;
+    if (!doctor.id) return null;
     const contentHeight = this.calcContentHeight();
-    return !doctor.id ? null : (
+    const viewModel = {
+      contentHeight,
+      goToNewReview: review => {
+        go(`/${params.doctorId}/add-review`);
+      },
+      goToReview: review => {
+        go(`/${params.doctorId}/reviews/${review.id}`);
+      },
+      goToReviews: () => {
+        go(`/${params.doctorId}`);
+      },
+      review: reviewsById[params.reviewId],
+      reviewsById,
+    };
+    return (
       <div style={styles.container}>
         <DoctorHeader doctor={doctor} setHeight={this.setHeaderHeight} />
         <div style={styles.contentContainer(contentHeight)}>
-          {children({
-            contentHeight,
-            goToDetail: this.goToDetail,
-            reviewsById,
-          })}
+          {children(viewModel)}
         </div>
       </div>
     );

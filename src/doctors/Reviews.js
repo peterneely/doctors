@@ -3,16 +3,13 @@ import React from 'react';
 import Doctor from './Doctor';
 import ReviewListItems from './ReviewListItems';
 
-const handleEditReview = goToDetail => review => {
-  goToDetail(`/reviews/${review.id}`);
-};
-
 const Reviews = () => (
   <Doctor>
-    {({ contentHeight, goToDetail, reviewsById }) => (
+    {({ contentHeight, goToNewReview, goToReview, reviewsById }) => (
       <ReviewListItems
         contentHeight={contentHeight}
-        onEditReview={handleEditReview(goToDetail)}
+        onAddReview={goToNewReview}
+        onEditReview={goToReview}
         reviewsById={reviewsById}
       />
     )}

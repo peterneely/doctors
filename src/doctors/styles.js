@@ -115,6 +115,33 @@ export const doctorListItems = {
   }),
 };
 
+export const review = {
+  author: { fontWeight: 'bold', margin: '15px 0' },
+  authorContainer: {
+    alignItems: 'flex-start',
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  body: {
+    color: colors.listItemText,
+    fontSize: '0.9em',
+    fontWeight: 'lighter',
+    lineHeight: '1.6em',
+    margin: '4px 0',
+  },
+  button: {
+    color: colors.listItemTitle,
+    fontSize: '0.8em',
+    fontWeight: 'lighter',
+  },
+  container: { borderBottom: borders.default, padding: 20 },
+  date: {
+    color: colors.listItemText,
+    fontSize: '0.8em',
+    fontWeight: 'lighter',
+  },
+};
+
 export const reviewListItem = {
   author: { fontWeight: 'bold', margin: '15px 0' },
   authorContainer: {
