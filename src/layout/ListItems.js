@@ -33,15 +33,10 @@ class ListItems extends Component {
   };
 
   render() {
-    const {
-      height,
-      renderItem,
-      scrollPositionStoreKey,
-      style = {},
-    } = this.props;
+    const { height, renderItem, scrollPositionId, style = {} } = this.props;
     return (
       <ScrollRestore
-        storeKey={scrollPositionStoreKey}
+        id={scrollPositionId}
         style={{ ...styles.container(height), ...style }}>
         <List style={styles.listContainer}>
           {this.filterItems().map(renderItem)}
@@ -58,7 +53,7 @@ ListItems.propTypes = {
   itemsById: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   renderItem: PropTypes.func.isRequired,
-  scrollPositionStoreKey: PropTypes.string.isRequired,
+  scrollPositionId: PropTypes.string.isRequired,
   searchTerms: PropTypes.string.isRequired,
   setActiveItem: PropTypes.func.isRequired,
   style: PropTypes.object,

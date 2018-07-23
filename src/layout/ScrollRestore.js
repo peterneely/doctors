@@ -7,13 +7,13 @@ import * as actions from './actions';
 
 class ScrollRestore extends Component {
   handleScroll = event => {
-    const { actions = {}, storeKey } = this.props;
+    const { actions = {}, id } = this.props;
     const { setScrollPosition = () => {} } = actions;
     const position = event.target.scrollTop;
-    setScrollPosition(storeKey, position);
+    setScrollPosition(id, position);
   };
 
-  setRef = ref => {
+  init = ref => {
     if (!ref) return;
     const { scrollPosition } = this.props;
     ref.scrollTop = scrollPosition || 0;
@@ -23,7 +23,7 @@ class ScrollRestore extends Component {
   render() {
     const { children, style = {} } = this.props;
     return (
-      <div ref={this.setRef} style={style}>
+      <div ref={this.init} style={style}>
         {children}
       </div>
     );
@@ -33,14 +33,14 @@ class ScrollRestore extends Component {
 ScrollRestore.propTypes = {
   actions: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
+  id: PropTypes.string.isRequired,
   scrollPosition: PropTypes.number,
-  storeKey: PropTypes.string.isRequired,
   style: PropTypes.object,
 };
 
 const mapStateToProps = (state, props) => {
   const {
-    layout: { [props.storeKey]: scrollPosition },
+    layout: { scrollPositions: { [props.id]: scrollPosition } = {} },
   } = state;
   return { scrollPosition };
 };

@@ -39,8 +39,8 @@ class DoctorListItems extends Component {
         idParamProp="doctorId"
         itemsById={doctorsById}
         renderItem={this.renderDoctorListItem}
+        scrollPositionId="doctors"
         setActiveItem={setActiveDoctor}
-        scrollPositionStoreKey="doctorsScrollPosition"
         style={styles.container(showRightBorder)}
       />
     );

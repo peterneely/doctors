@@ -26,7 +26,7 @@ class ReviewListItems extends Component {
     return (
       <div style={styles.container}>
         <ScrollRestore
-          storeKey="doctorReviewsScrollPosition"
+          id="doctorReviews"
           style={styles.reviewsContainer(contentHeight)}>
           {reviews.map(review => (
             <ReviewListItem

@@ -8,6 +8,7 @@ export const setLayoutHeight = height => ({
 });
 
 export const setMessage = ({ details, message, messageType }) => {
+  // Can log details (errors) to some logging service.
   return (dispatch, getState) => {
     const { layout: { message: prevMessage } = {} } = getState();
     if (prevMessage) return;
@@ -15,12 +16,11 @@ export const setMessage = ({ details, message, messageType }) => {
       payload: { message, messageType },
       type: types.SET_MESSAGE,
     });
-    // Can log details (errors) to some logging service.
   };
 };
 
-export const setScrollPosition = (key, position) => ({
-  payload: { key, position },
+export const setScrollPosition = (id, position) => ({
+  payload: { id, position },
   type: types.SET_SCROLL_POSITION,
 });
 
