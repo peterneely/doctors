@@ -18,11 +18,11 @@ class DoctorListItem extends Component {
   render() {
     const { active, classes, doctor = {} } = this.props;
     const {
+      addressLine1,
       avatar,
       chipType,
       displayName,
       id,
-      location: { street },
       practiceType,
       ratingSummary,
       reviewCount,
@@ -39,7 +39,7 @@ class DoctorListItem extends Component {
           <SmallChip label={ratingSummary} type={chipType} />
           <span style={styles.practiceType}>{practiceType}</span>
           <div style={styles.text}>
-            <div>{street}</div>
+            <div>{addressLine1}</div>
             <div>{`${reviewCount} Reviews`}</div>
           </div>
         </ListItemText>

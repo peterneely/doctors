@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { doctor as styles } from './styles';
+import DoctorHeader from './DoctorHeader';
 
 class Doctor extends Component {
   content = (() => {
@@ -16,7 +17,9 @@ class Doctor extends Component {
         } = this.props;
         const doctor = doctorsById[id];
         return !doctor ? null : (
-          <div style={styles.container(height)}>Doctor {doctor.name.first}</div>
+          <div style={styles.container(height)}>
+            <DoctorHeader />
+          </div>
         );
       },
     };

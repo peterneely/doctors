@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import * as actions from './actions';
 import MasterDetail from '../layout/MasterDetail';
-import DoctorList from './DoctorList';
+import DoctorListItems from './DoctorListItems';
 import SearchListItems from '../layout/SearchListItems';
 
 class Doctors extends Component {
@@ -20,7 +20,7 @@ class Doctors extends Component {
     return (
       <MasterDetail
         listItems={
-          <DoctorList
+          <DoctorListItems
             activeDoctor={activeDoctor}
             doctorsById={doctorsById}
             setActiveDoctor={setActiveDoctor}

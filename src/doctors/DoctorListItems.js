@@ -6,7 +6,7 @@ import ListItems from '../layout/ListItems';
 import history from '../history';
 import { rootPath } from './Routes';
 
-class DoctorList extends Component {
+class DoctorListItems extends Component {
   handleSelectDoctor = doctor => {
     this.props.setActiveDoctor(doctor);
     history.push(`${rootPath}/${doctor.id}`);
@@ -37,10 +37,10 @@ class DoctorList extends Component {
   }
 }
 
-DoctorList.propTypes = {
+DoctorListItems.propTypes = {
   activeDoctor: PropTypes.object.isRequired,
   doctorsById: PropTypes.object,
   setActiveDoctor: PropTypes.func.isRequired,
 };
 
-export default DoctorList;
+export default DoctorListItems;

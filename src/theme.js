@@ -3,6 +3,8 @@ import { createMuiTheme } from '@material-ui/core/styles';
 const colorCodes = {
   darkBlue: '#191A52',
   darkBlueHighlight: '#27466A',
+  darkBlueHighlightHover: '#526b88',
+  darkGrey: '#808080',
   grey: '#AAAAAA',
   lightTeal: '#D9F0EB',
   pink: '#FB646B',
@@ -12,9 +14,12 @@ const colorCodes = {
 export const colors = {
   activeBackground: colorCodes.lightTeal,
   border: colorCodes.grey,
+  buttonPrimary: colorCodes.darkBlueHighlight,
+  buttonPrimaryHover: colorCodes.darkBlueHighlightHover,
   cool: colorCodes.grey,
+  detailTitle: colorCodes.darkBlueHighlight,
   hot: colorCodes.pink,
-  listItemText: colorCodes.grey,
+  listItemText: colorCodes.darkGrey,
   listItemTitle: colorCodes.teal,
   medium: colorCodes.teal,
   searchBarLeft: colorCodes.darkBlue,
