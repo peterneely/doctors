@@ -40,6 +40,7 @@ class DoctorListItems extends Component {
         itemsById={doctorsById}
         renderItem={this.renderDoctorListItem}
         setActiveItem={setActiveDoctor}
+        scrollPositionStoreKey="doctorsScrollPosition"
         style={styles.container(showRightBorder)}
       />
     );

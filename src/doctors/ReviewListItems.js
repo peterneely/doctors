@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import _ from 'lodash';
 
 import ReviewListItem from './ReviewListItem';
+import ScrollRestore from '../layout/ScrollRestore';
 import { reviewListItems as styles } from './styles';
 
 class ReviewListItems extends Component {
@@ -24,7 +25,9 @@ class ReviewListItems extends Component {
       .value();
     return (
       <div style={styles.container}>
-        <div style={styles.reviewsContainer(contentHeight)}>
+        <ScrollRestore
+          storeKey="doctorReviewsScrollPosition"
+          style={styles.reviewsContainer(contentHeight)}>
           {reviews.map(review => (
             <ReviewListItem
               key={review.id}
@@ -32,7 +35,7 @@ class ReviewListItems extends Component {
               onEdit={handleEditReview}
             />
           ))}
-        </div>
+        </ScrollRestore>
         <div style={styles.commandContainer}>
           <Button
             aria-label="Leave review"

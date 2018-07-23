@@ -19,6 +19,11 @@ export const setMessage = ({ details, message, messageType }) => {
   };
 };
 
+export const setScrollPosition = (key, position) => ({
+  payload: { key, position },
+  type: types.SET_SCROLL_POSITION,
+});
+
 export const setSearchTerms = searchTerms => ({
   payload: searchTerms,
   type: types.SET_SEARCH_TERMS,

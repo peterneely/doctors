@@ -14,6 +14,8 @@ export default function reduce(state = initialState, action) {
         message: payload.message,
         messageType: payload.messageType,
       };
+    case types.SET_SCROLL_POSITION:
+      return { ...state, [payload.key]: payload.position };
     case types.SET_SEARCH_TERMS:
       return { ...state, searchTerms: payload };
     default:

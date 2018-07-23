@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import List from '@material-ui/core/List';
 import _ from 'lodash';
 
+import ScrollRestore from '../layout/ScrollRestore';
 import { listItems as styles } from './styles';
 
 class ListItems extends Component {
@@ -32,13 +33,20 @@ class ListItems extends Component {
   };
 
   render() {
-    const { height, renderItem, style = {} } = this.props;
+    const {
+      height,
+      renderItem,
+      scrollPositionStoreKey,
+      style = {},
+    } = this.props;
     return (
-      <div style={{ ...styles.container(height), ...style }}>
+      <ScrollRestore
+        storeKey={scrollPositionStoreKey}
+        style={{ ...styles.container(height), ...style }}>
         <List style={styles.listContainer}>
           {this.filterItems().map(renderItem)}
         </List>
-      </div>
+      </ScrollRestore>
     );
   }
 }
@@ -50,6 +58,7 @@ ListItems.propTypes = {
   itemsById: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   renderItem: PropTypes.func.isRequired,
+  scrollPositionStoreKey: PropTypes.string.isRequired,
   searchTerms: PropTypes.string.isRequired,
   setActiveItem: PropTypes.func.isRequired,
   style: PropTypes.object,
