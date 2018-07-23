@@ -8,8 +8,8 @@ import _ from 'lodash';
 import { listItems as styles } from './styles';
 
 class ListItems extends Component {
-  componentDidUpdate(prevProps) {
-    this.trySetActiveItem(prevProps);
+  componentDidUpdate() {
+    this.trySetActiveItem();
   }
 
   filterItems = () => {
@@ -19,14 +19,14 @@ class ListItems extends Component {
     );
   };
 
-  trySetActiveItem = prevProps => {
-    const { activeItem: prevActiveItem = {} } = prevProps;
+  trySetActiveItem = () => {
+    const { activeItem = {} } = this.props;
     const {
       itemsById,
       match: { params = {} },
       setActiveItem = () => {},
     } = this.props;
-    if (!_.size(itemsById) || params.id === prevActiveItem.id) return;
+    if (!_.size(itemsById) || params.id === activeItem.id) return;
     setActiveItem(itemsById[params.id]);
   };
 

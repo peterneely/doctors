@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-// import ArrowIcon from '@material-ui/icons/ArrowForward';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -11,7 +8,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import _ from 'lodash';
 
-import * as actions from './actions';
 import { doctorHeader as styles } from './styles';
 
 class DoctorHeader extends Component {
@@ -58,18 +54,4 @@ DoctorHeader.propTypes = {
   doctor: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => {
-  const {
-    doctors: { activeDoctor: doctor = {} },
-  } = state;
-  return { doctor };
-};
-
-const mapDispatchToProps = dispatch => {
-  return { actions: bindActionCreators(actions, dispatch) };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withStyles(styles)(DoctorHeader));
+export default withStyles(styles)(DoctorHeader);

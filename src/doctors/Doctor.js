@@ -1,47 +1,42 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { doctor as styles } from './styles';
+
+import * as actions from './actions';
 import DoctorHeader from './DoctorHeader';
+import { doctor as styles } from './styles';
 
 class Doctor extends Component {
-  content = (() => {
-    return {
-      render: () => {
-        const {
-          doctorsById,
-          height,
-          match: {
-            params: { id },
-          },
-        } = this.props;
-        const doctor = doctorsById[id];
-        return !doctor ? null : (
-          <div style={styles.container(height)}>
-            <DoctorHeader />
-          </div>
-        );
-      },
-    };
-  })();
-
   render() {
-    return this.content.render();
+    const { doctor, height } = this.props;
+    return !doctor ? null : (
+      <div style={styles.container(height)}>
+        <DoctorHeader doctor={doctor} />
+      </div>
+    );
   }
 }
 
 Doctor.propTypes = {
-  doctorsById: PropTypes.object,
+  actions: PropTypes.object.isRequired,
+  doctor: PropTypes.object.isRequired,
   height: PropTypes.number,
-  match: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => {
   const {
-    doctors: { doctorsById = {} },
+    doctors: { activeDoctor: doctor = {} },
     layout: { height },
   } = state;
-  return { doctorsById, height };
+  return { doctor, height };
 };
 
-export default connect(mapStateToProps)(Doctor);
+const mapDispatchToProps = dispatch => {
+  return { actions: bindActionCreators(actions, dispatch) };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Doctor);

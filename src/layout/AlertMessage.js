@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
+
+import * as actions from './actions';
 
 class MasterDetail extends Component {
   state = { alertOpen: false };
@@ -14,10 +17,11 @@ class MasterDetail extends Component {
 
   handleClose = () => {
     this.setState({ alertOpen: false });
+    setTimeout(this.props.actions.clearMessage, 1000);
   };
 
   tryShow = prevProps => {
-    if (this.props.message === prevProps.message) return;
+    if (!this.props.message || prevProps.message) return;
     this.setState({ alertOpen: true });
   };
 
@@ -46,6 +50,7 @@ class MasterDetail extends Component {
 }
 
 MasterDetail.propTypes = {
+  actions: PropTypes.object.isRequired,
   message: PropTypes.string,
   messageType: PropTypes.string,
 };
@@ -57,4 +62,11 @@ const mapStateToProps = state => {
   return { message, messageType };
 };
 
-export default connect(mapStateToProps)(MasterDetail);
+const mapDispatchToProps = dispatch => {
+  return { actions: bindActionCreators(actions, dispatch) };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MasterDetail);

@@ -72,12 +72,12 @@ const random = collection => {
   return collection[randomIndex];
 };
 
-const toViewModel = results =>
+const toViewModel = (results = []) =>
   results
-    .map((result, index) => {
+    .map((result = {}, index) => {
       const { data: { results = [] } = {} } = result;
       return results.length ? extendDoctor(results[0], index) : null;
     })
-    .filter(item => item);
+    .filter(doctor => doctor);
 
 export default toViewModel;

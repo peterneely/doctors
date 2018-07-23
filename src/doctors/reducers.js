@@ -11,14 +11,22 @@ export default function reduce(state = initialState, action) {
         ...state,
         activeDoctor: {},
         doctorsById: {},
-        success: false,
       };
     case types.SET_DOCTORS_BY_ID_SUCCESS:
       return {
         ...state,
         activeDoctor: {},
         doctorsById: payload,
-        success: true,
+      };
+    case types.SET_REVIEWS_BY_ID_FAIL:
+      return {
+        ...state,
+        reviewsById: {},
+      };
+    case types.SET_REVIEWS_BY_ID_SUCCESS:
+      return {
+        ...state,
+        reviewsById: payload,
       };
     default:
       return state;

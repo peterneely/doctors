@@ -4,6 +4,8 @@ import * as types from './types';
 export default function reduce(state = initialState, action) {
   const { payload, type } = action;
   switch (type) {
+    case types.CLEAR_MESSAGE:
+      return { ...state, message: '', messageType: '' };
     case types.SET_LAYOUT_HEIGHT:
       return { ...state, height: payload };
     case types.SET_MESSAGE:
