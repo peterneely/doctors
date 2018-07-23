@@ -31,9 +31,9 @@ class ListItems extends Component {
   };
 
   render() {
-    const { height, renderItem } = this.props;
+    const { height, renderItem, style = {} } = this.props;
     return (
-      <div style={styles.container(height)}>
+      <div style={{ ...styles.container(height), ...style }}>
         <List style={styles.listContainer}>
           {this.filterItems().map(renderItem)}
         </List>
@@ -44,17 +44,18 @@ class ListItems extends Component {
 
 ListItems.propTypes = {
   activeItem: PropTypes.object.isRequired,
-  height: PropTypes.number,
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   itemsById: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   renderItem: PropTypes.func.isRequired,
   searchTerms: PropTypes.string.isRequired,
   setActiveItem: PropTypes.func.isRequired,
+  style: PropTypes.object,
 };
 
 const mapStateToProps = state => {
   const {
-    layout: { height, searchTerms = '' },
+    layout: { height = 'auto', searchTerms = '' },
     match = {},
   } = state;
   return { height, match, searchTerms };

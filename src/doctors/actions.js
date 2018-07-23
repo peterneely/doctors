@@ -3,8 +3,19 @@ import * as repo from './repo';
 import * as types from './types';
 import { setMessage } from '../layout/actions';
 
+export const clearActiveDoctor = () => {
+  console.log('clearActiveDoctor');
+  return (dispatch, getState) => {
+    const { doctors: { activeDoctor = {} } = {} } = getState();
+    if (!_.size(activeDoctor)) return;
+    dispatch({ type: types.CLEAR_ACTIVE_DOCTOR });
+  };
+};
+
 export const getDoctors = () => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const { doctors: { gotDoctors } = {} } = getState();
+    if (gotDoctors) return;
     repo
       .getDoctors()
       .then(doctors => {

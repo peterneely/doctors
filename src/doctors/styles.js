@@ -1,11 +1,7 @@
 import { borders, colors } from '../theme';
 
 export const doctor = {
-  container: (height = 'auto') => ({
-    borderLeft: borders.default,
-    height,
-    overflowY: 'scroll',
-  }),
+  container: { borderLeft: borders.default },
   contentContainer: { display: 'flex' },
   displayName: {},
   practiceType: {},
@@ -111,3 +107,34 @@ export const doctorListItem = (() => {
     textContainer: { margin: '5px 0 15px' },
   };
 })();
+
+export const doctorListItems = {
+  container: showRightBorder => ({
+    borderRight: showRightBorder ? borders.default : 'none',
+  }),
+};
+
+export const reviewListItem = {
+  author: {},
+  body: {},
+  container: {},
+  date: {},
+};
+
+export const reviewListItems = {
+  button: {
+    '&:hover': { backgroundColor: colors.buttonSecondaryHover },
+    backgroundColor: colors.buttonSecondary,
+  },
+  commandContainer: { display: 'flex', flex: 1, height: 50, marginTop: 30 },
+  commandMargin: { width: 48 },
+  container: { display: 'flex' },
+  reviewButton: { color: 'white' },
+  reviewButtonLabel: { padding: '8px 15px' },
+  reviewsContainer: height => ({
+    flex: 3,
+    height,
+    marginRight: 20,
+    overflowY: 'scroll',
+  }),
+};

@@ -11,6 +11,24 @@ import _ from 'lodash';
 import { doctorHeader as styles } from './styles';
 
 class DoctorHeader extends Component {
+  componentDidMount() {
+    this.trySetHeight();
+  }
+
+  componentDidUpdate() {
+    this.trySetHeight();
+  }
+
+  setRef = ref => {
+    if (!ref) return;
+    this.headerEl = ref;
+  };
+
+  trySetHeight = () => {
+    const { setHeight = () => {} } = this.props;
+    if (this.headerEl) setHeight(this.headerEl.clientHeight);
+  };
+
   render() {
     const { classes, doctor = {} } = this.props;
     if (!_.size(doctor)) return null;
@@ -23,28 +41,34 @@ class DoctorHeader extends Component {
       reviewCount,
     } = doctor;
     return (
-      <ListItem style={styles.container}>
-        <Avatar alt={displayName} className={classes.bigAvatar} src={avatar} />
-        <div style={styles.mainContainer}>
-          <ListItemText>
-            <div style={styles.title}>{displayName}</div>
-            <div style={styles.practiceType}>{practiceType}</div>
-            <div style={styles.reviewCount}>{`${reviewCount} Reviews`}</div>
+      <div ref={this.setRef}>
+        <ListItem style={styles.container}>
+          <Avatar
+            alt={displayName}
+            className={classes.bigAvatar}
+            src={avatar}
+          />
+          <div style={styles.mainContainer}>
+            <ListItemText>
+              <div style={styles.title}>{displayName}</div>
+              <div style={styles.practiceType}>{practiceType}</div>
+              <div style={styles.reviewCount}>{`${reviewCount} Reviews`}</div>
+            </ListItemText>
+            <Button
+              aria-label="Directions"
+              className={classes.fab}
+              style={styles.directionsButton}
+              variant="fab">
+              <DirectionsIcon style={styles.directionsIcon} />
+            </Button>
+          </div>
+          <ListItemText style={styles.addressContainer}>
+            <div style={styles.addressLabel}>ADDRESS</div>
+            <div style={styles.address}>{addressLine1}</div>
+            <div style={styles.address}>{addressLine2}</div>
           </ListItemText>
-          <Button
-            aria-label="Directions"
-            className={classes.fab}
-            style={styles.directionsButton}
-            variant="fab">
-            <DirectionsIcon style={styles.directionsIcon} />
-          </Button>
-        </div>
-        <ListItemText style={styles.addressContainer}>
-          <div style={styles.addressLabel}>ADDRESS</div>
-          <div style={styles.address}>{addressLine1}</div>
-          <div style={styles.address}>{addressLine2}</div>
-        </ListItemText>
-      </ListItem>
+        </ListItem>
+      </div>
     );
   }
 }
@@ -52,6 +76,7 @@ class DoctorHeader extends Component {
 DoctorHeader.propTypes = {
   classes: PropTypes.object.isRequired,
   doctor: PropTypes.object.isRequired,
+  setHeight: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(DoctorHeader);

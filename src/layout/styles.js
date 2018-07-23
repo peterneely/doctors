@@ -1,7 +1,7 @@
 import { colors } from '../theme';
 
 export const listItems = {
-  container: (height = 'auto') => ({
+  container: height => ({
     flex: 1,
     height,
     overflowY: 'scroll',

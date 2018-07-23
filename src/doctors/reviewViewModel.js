@@ -6,10 +6,10 @@ const extendReviews = (reviews, authors) => {
     const { body, id, userId } = review;
     const author = authorsById[userId] || {};
     return {
+      name: author.name || 'Some Name',
       body,
       date: new Date(),
       id,
-      name: author.name || 'Some Name',
     };
   });
 };

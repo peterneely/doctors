@@ -29,7 +29,7 @@ class LayoutHeight extends Component {
 
 LayoutHeight.propTypes = {
   actions: PropTypes.object.isRequired,
-  height: PropTypes.number,
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   offset: PropTypes.number,
 };
 

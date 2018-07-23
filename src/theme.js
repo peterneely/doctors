@@ -9,6 +9,7 @@ const colorCodes = {
   lightTeal: '#D9F0EB',
   pink: '#FB646B',
   teal: '#64C5AF',
+  tealHover: '#83d1bf',
 };
 
 export const colors = {
@@ -16,6 +17,8 @@ export const colors = {
   border: colorCodes.grey,
   buttonPrimary: colorCodes.darkBlueHighlight,
   buttonPrimaryHover: colorCodes.darkBlueHighlightHover,
+  buttonSecondary: colorCodes.teal,
+  buttonSecondaryHover: colorCodes.tealHover,
   cool: colorCodes.grey,
   detailTitle: colorCodes.darkBlueHighlight,
   hot: colorCodes.pink,
