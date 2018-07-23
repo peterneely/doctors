@@ -62,7 +62,7 @@ export const getReviews = ({ id: doctorId }) => {
   };
 };
 
-export const setActiveDoctor = doctor => {
+export const setActiveDoctor = (doctor = {}) => {
   return (dispatch, getState) => {
     const { doctors: { activeDoctor = {} } = {} } = getState();
     if (activeDoctor.id === doctor.id) return;
