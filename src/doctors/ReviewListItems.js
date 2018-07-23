@@ -17,11 +17,15 @@ class ReviewListItems extends Component {
   render() {
     const { classes, reviewsById = {} } = this.props;
     const height = this.getContainerHeight();
-    const sortedReviews = _.orderBy(_.map(reviewsById), ['order'], ['desc']);
+    const reviews = _.chain(reviewsById)
+      .map()
+      .take(20)
+      .orderBy(['order'], ['desc'])
+      .value();
     return (
       <div style={styles.container}>
         <div style={styles.reviewsContainer(height)}>
-          {sortedReviews.map(review => (
+          {reviews.map(review => (
             <ReviewListItem key={review.id} review={review} />
           ))}
         </div>
