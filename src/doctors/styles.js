@@ -2,6 +2,12 @@ import { borders, colors } from '../theme';
 
 export const doctor = {
   container: { borderLeft: borders.default },
+  contentContainer: height => ({
+    // flex: 3,
+    height,
+    // marginRight: 20,
+    // overflowY: 'scroll',
+  }),
 };
 
 export const doctorHeader = (() => {

@@ -2,19 +2,26 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import _ from 'lodash';
 
 import * as actions from './actions';
 import DoctorHeader from './DoctorHeader';
-import ReviewListItems from './ReviewListItems';
 import { doctor as styles } from './styles';
 import { go } from './Routes';
 
 class Doctor extends Component {
   state = { headerHeight: 0 };
 
-  handleEditReview = review => {
+  calcContentHeight = () => {
+    const { height: layoutHeight } = this.props;
+    const { headerHeight } = this.state;
+    return _.isNumber(layoutHeight) ? layoutHeight - headerHeight : 'auto';
+  };
+
+  goToDetail = path => {
     const { params } = this.props.match;
-    go(`/${params.doctorId}/reviews/${review.id}`);
+    go(`/${params.doctorId}${path}`);
   };
 
   setHeaderHeight = headerHeight => {
@@ -23,18 +30,18 @@ class Doctor extends Component {
   };
 
   render() {
-    const { doctor, height, reviewsById } = this.props;
-    const { headerHeight } = this.state;
-    const hasDoctor = !!doctor.id;
-    return !hasDoctor ? null : (
+    const { children, doctor, reviewsById } = this.props;
+    const contentHeight = this.calcContentHeight();
+    return !doctor.id ? null : (
       <div style={styles.container}>
         <DoctorHeader doctor={doctor} setHeight={this.setHeaderHeight} />
-        <ReviewListItems
-          headerHeight={headerHeight}
-          layoutHeight={height}
-          onEditReview={this.handleEditReview}
-          reviewsById={reviewsById}
-        />
+        <div style={styles.contentContainer(contentHeight)}>
+          {children({
+            contentHeight,
+            goToDetail: this.goToDetail,
+            reviewsById,
+          })}
+        </div>
       </div>
     );
   }
@@ -42,6 +49,7 @@ class Doctor extends Component {
 
 Doctor.propTypes = {
   actions: PropTypes.object.isRequired,
+  children: PropTypes.func.isRequired,
   doctor: PropTypes.object.isRequired,
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   match: PropTypes.object.isRequired,
@@ -63,4 +71,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Doctor);
+)(withRouter(Doctor));

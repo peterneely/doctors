@@ -9,18 +9,13 @@ import ReviewListItem from './ReviewListItem';
 import { reviewListItems as styles } from './styles';
 
 class ReviewListItems extends Component {
-  getContainerHeight = () => {
-    const { headerHeight = 0, layoutHeight } = this.props;
-    return _.isNumber(layoutHeight) ? layoutHeight - headerHeight : 'auto';
-  };
-
   render() {
     const {
       classes,
+      contentHeight,
       onEditReview: handleEditReview,
       reviewsById = {},
     } = this.props;
-    const height = this.getContainerHeight();
     const reviews = _.chain(reviewsById)
       .map()
       .take(20)
@@ -28,7 +23,7 @@ class ReviewListItems extends Component {
       .value();
     return (
       <div style={styles.container}>
-        <div style={styles.reviewsContainer(height)}>
+        <div style={styles.reviewsContainer(contentHeight)}>
           {reviews.map(review => (
             <ReviewListItem
               key={review.id}
@@ -56,8 +51,7 @@ class ReviewListItems extends Component {
 
 ReviewListItems.propTypes = {
   classes: PropTypes.object.isRequired,
-  headerHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  layoutHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  contentHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onEditReview: PropTypes.func.isRequired,
   reviewsById: PropTypes.object.isRequired,
 };

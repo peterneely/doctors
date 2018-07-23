@@ -1,16 +1,16 @@
 import React from 'react';
 
 import Doctor from './Doctor';
-import Review from './Review';
+import ReviewListItems from './ReviewListItems';
 
 const handleEditReview = goToDetail => review => {
   goToDetail(`/reviews/${review.id}`);
 };
 
-const EditReview = () => (
+const Reviews = () => (
   <Doctor>
     {({ contentHeight, goToDetail, reviewsById }) => (
-      <Review
+      <ReviewListItems
         contentHeight={contentHeight}
         onEditReview={handleEditReview(goToDetail)}
         reviewsById={reviewsById}
@@ -19,4 +19,4 @@ const EditReview = () => (
   </Doctor>
 );
 
-export default EditReview;
+export default Reviews;

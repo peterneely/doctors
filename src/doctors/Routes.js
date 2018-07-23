@@ -1,17 +1,17 @@
 import React, { Fragment } from 'react';
 import { Route } from 'react-router-dom';
 
-import Doctor from './Doctor';
-import Doctors from './Doctors';
 import AddReview from './AddReview';
+import Doctors from './Doctors';
 import EditReview from './EditReview';
+import Reviews from './Reviews';
 import history from '../history';
 
-export const rootPath = '/doctors';
+const rootPath = '/doctors';
 
 const routes = [
   { path: `${rootPath}/` },
-  { Component: Doctor, path: `${rootPath}/:doctorId` },
+  { Component: Reviews, path: `${rootPath}/:doctorId` },
   { Component: EditReview, path: `${rootPath}/:doctorId/reviews/:reviewId` },
   { Component: AddReview, path: `${rootPath}/:doctorId/add-review` },
 ];
