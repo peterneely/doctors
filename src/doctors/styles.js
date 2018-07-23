@@ -2,11 +2,6 @@ import { borders, colors } from '../theme';
 
 export const doctor = {
   container: { borderLeft: borders.default },
-  contentContainer: { display: 'flex' },
-  displayName: {},
-  practiceType: {},
-  reviewCount: {},
-  textContainer: {},
 };
 
 export const doctorHeader = (() => {
@@ -25,7 +20,7 @@ export const doctorHeader = (() => {
     addressContainer: { flex: 1 },
     addressLabel: {
       color: colors.listItemText,
-      fontSize: '0.7em',
+      fontSize: '0.8em',
       fontWeight: 'lighter',
     },
     bigAvatar: {
@@ -115,10 +110,34 @@ export const doctorListItems = {
 };
 
 export const reviewListItem = {
-  author: {},
-  body: {},
-  container: {},
-  date: {},
+  author: { flex: 10, fontWeight: 'bold', margin: '15px 0' },
+  authorContainer: {
+    alignItems: 'flex-start',
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  body: {
+    color: colors.listItemText,
+    fontSize: '0.9em',
+    fontWeight: 'lighter',
+    lineHeight: '1.6em',
+    margin: '4px 0',
+  },
+  container: { borderBottom: borders.default, padding: 20 },
+  date: {
+    color: colors.listItemText,
+    fontSize: '0.8em',
+    fontWeight: 'lighter',
+  },
+  edit: {
+    color: colors.listItemTitle,
+    cursor: 'pointer',
+    flex: 1,
+    fontSize: '0.8em',
+    fontWeight: 'lighter',
+    padding: '15px 0 15px 15px',
+    textAlign: 'right',
+  },
 };
 
 export const reviewListItems = {

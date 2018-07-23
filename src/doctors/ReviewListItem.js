@@ -10,7 +10,10 @@ class ReviewListItem extends Component {
     return (
       <div style={styles.container}>
         <div style={styles.date}>{date.toString()}</div>
-        <div style={styles.author}>{name}</div>
+        <div style={styles.authorContainer}>
+          <div style={styles.author}>{name}</div>
+          <div style={styles.edit}>Edit</div>
+        </div>
         <div style={styles.body}>{body}</div>
       </div>
     );

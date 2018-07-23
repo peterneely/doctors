@@ -1,3 +1,4 @@
+import moment from 'moment';
 import _ from 'lodash';
 
 const extendReviews = (reviews, authors) => {
@@ -5,11 +6,15 @@ const extendReviews = (reviews, authors) => {
   return reviews.map((review = {}) => {
     const { body, id, userId } = review;
     const author = authorsById[userId] || {};
+    const isoDate = moment(new Date())
+      .subtract(_.random(1095), 'days')
+      .format('YYYY-MM-DD');
     return {
-      name: author.name || 'Some Name',
       body,
-      date: new Date(),
+      date: moment(isoDate).format('MMM DD, YYYY'),
       id,
+      name: author.name || 'Some Name',
+      order: isoDate,
     };
   });
 };
