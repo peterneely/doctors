@@ -8,6 +8,7 @@ class DefaultButton extends Component {
       ariaLabel = '',
       children,
       classes = {},
+      disabled,
       fullWidth,
       label = '',
       onClick: handleClick = () => {},
@@ -17,6 +18,7 @@ class DefaultButton extends Component {
       <Button
         aria-label={ariaLabel}
         className={classes.button}
+        disabled={disabled}
         fullWidth={fullWidth}
         onClick={handleClick}
         style={styles.buttonLabel}
@@ -32,6 +34,7 @@ DefaultButton.propTypes = {
   ariaLabel: PropTypes.string,
   children: PropTypes.object,
   classes: PropTypes.object.isRequired,
+  disabled: PropTypes.bool,
   fullWidth: PropTypes.bool,
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func,

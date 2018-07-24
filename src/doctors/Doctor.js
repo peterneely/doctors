@@ -28,7 +28,7 @@ class Doctor extends Component {
     const {
       addReview = () => {},
       removeReview = () => {},
-      updateReview = () => {},
+      upsertReview: updateReview = () => {},
     } = actions;
     return {
       addReview,

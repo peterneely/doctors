@@ -4,20 +4,7 @@ import * as types from './types';
 import { setMessage } from '../layout/actions';
 import { formatDate } from './reviewViewModel';
 
-export const addReview = ({ body, name }) => {
-  return (dispatch, getState) => {
-    const { doctors: { reviewsById = {} } = {} } = getState();
-    const { displayDate, sortDate } = formatDate(new Date());
-    const review = {
-      body,
-      date: displayDate,
-      id: _.size(reviewsById) + 1,
-      name,
-      order: sortDate,
-    };
-    dispatch({ payload: review, type: types.ADD_REVIEW });
-  };
-};
+export const addReview = ({ body, name }) => upsertReview({ body, name });
 
 export const clearActiveDoctor = () => {
   return (dispatch, getState) => {
@@ -88,5 +75,21 @@ export const setActiveDoctor = (doctor = {}) => {
     if (activeDoctor.id === doctor.id) return;
     dispatch({ payload: doctor, type: types.SET_ACTIVE_DOCTOR });
     dispatch(getReviews(doctor));
+  };
+};
+
+export const upsertReview = ({ body, id, name }) => {
+  return (dispatch, getState) => {
+    if (!body || !name) return;
+    const { doctors: { reviewsById = {} } = {} } = getState();
+    const { displayDate, sortDate } = formatDate(new Date());
+    const review = {
+      body,
+      date: displayDate,
+      id: id || _.size(reviewsById) + 1,
+      name,
+      order: sortDate,
+    };
+    dispatch({ payload: review, type: types.UPSERT_REVIEW });
   };
 };

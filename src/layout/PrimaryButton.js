@@ -28,6 +28,7 @@ PrimaryButton.propTypes = {
   ariaLabel: PropTypes.string,
   children: PropTypes.object,
   classes: PropTypes.object.isRequired,
+  disabled: PropTypes.bool,
   fullWidth: PropTypes.bool,
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func,

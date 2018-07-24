@@ -43,6 +43,8 @@ class Review extends Component {
 
   renderCommands = () => {
     const { add, onCancel: handleCancel } = this.props;
+    const { body, name } = this.state;
+    const canSubmit = !!body && !!name;
     return (
       <div style={styles.buttonsContainer}>
         <span style={styles.buttonContainer}>
@@ -65,6 +67,7 @@ class Review extends Component {
           <span style={styles.buttonContainer}>
             <PrimaryButton
               ariaLabel="Update"
+              disabled={!canSubmit}
               label="Update"
               onClick={this.handleUpdate}>
               <ArrowIcon />
@@ -75,6 +78,7 @@ class Review extends Component {
           <span style={styles.buttonContainer}>
             <PrimaryButton
               ariaLabel="Add Review"
+              disabled={!canSubmit}
               label="Add Review"
               onClick={this.handleAdd}>
               <ArrowIcon />
@@ -94,7 +98,7 @@ class Review extends Component {
         fullWidth
         id="name"
         onChange={this.handleChange('name')}
-        value={this.state.name}
+        value={this.state.name || ''}
       />
     </div>
   );
@@ -110,7 +114,7 @@ class Review extends Component {
         multiline
         onChange={this.handleChange('body')}
         rows="6"
-        value={this.state.body}
+        value={this.state.body || ''}
       />
     </div>
   );
