@@ -131,6 +131,7 @@ export const review = {
     position: 'absolute',
     top: -20,
   },
+  inputProps: { style: { paddingRight: 40 } },
   rightMargin: { flex: 1 },
   title: {
     color: colors.detailTitle,

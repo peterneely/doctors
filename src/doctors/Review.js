@@ -104,6 +104,7 @@ class Review extends Component {
           disableUnderline
           fullWidth
           id="name"
+          inputProps={styles.inputProps}
           onChange={this.handleChange('name')}
           value={name}
         />
@@ -122,6 +123,7 @@ class Review extends Component {
           disableUnderline
           fullWidth
           id="body"
+          inputProps={styles.inputProps}
           multiline
           onChange={this.handleChange('body')}
           rows="6"
