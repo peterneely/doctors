@@ -30,7 +30,7 @@ class DefaultButton extends Component {
 
 DefaultButton.propTypes = {
   ariaLabel: PropTypes.string,
-  children: PropTypes.object.isRequired,
+  children: PropTypes.object,
   classes: PropTypes.object.isRequired,
   fullWidth: PropTypes.bool,
   label: PropTypes.string.isRequired,

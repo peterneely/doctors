@@ -21,10 +21,17 @@ class Doctor extends Component {
 
   createViewModel = () => {
     const {
+      actions = {},
       match: { params },
       reviewsById,
     } = this.props;
+    const {
+      addReview = () => {},
+      removeReview = () => {},
+      updateReview = () => {},
+    } = actions;
     return {
+      addReview,
       contentHeight: this.calcContentHeight(),
       goToNewReview: () => {
         go(`/${params.doctorId}/add-review`);
@@ -35,8 +42,10 @@ class Doctor extends Component {
       goToReviews: () => {
         go(`/${params.doctorId}`);
       },
+      removeReview,
       review: reviewsById[params.reviewId],
       reviewsById,
+      updateReview,
     };
   };
 

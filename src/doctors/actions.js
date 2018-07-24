@@ -2,9 +2,24 @@ import _ from 'lodash';
 import * as repo from './repo';
 import * as types from './types';
 import { setMessage } from '../layout/actions';
+import { formatDate } from './reviewViewModel';
+
+export const addReview = ({ body, name }) => {
+  return (dispatch, getState) => {
+    const { doctors: { reviewsById = {} } = {} } = getState();
+    const { displayDate, sortDate } = formatDate(new Date());
+    const review = {
+      body,
+      date: displayDate,
+      id: _.size(reviewsById) + 1,
+      name,
+      order: sortDate,
+    };
+    dispatch({ payload: review, type: types.ADD_REVIEW });
+  };
+};
 
 export const clearActiveDoctor = () => {
-  console.log('clearActiveDoctor');
   return (dispatch, getState) => {
     const { doctors: { activeDoctor = {} } = {} } = getState();
     if (!_.size(activeDoctor)) return;

@@ -1,6 +1,15 @@
 import moment from 'moment';
 import _ from 'lodash';
 
+const isoDateFormat = 'YYYY-MM-DD';
+const displayDateFormat = 'MMM DD, YYYY';
+
+export const formatDate = date => {
+  const isoDate = moment(date).format(isoDateFormat);
+  const displayDate = moment(isoDate).format(displayDateFormat);
+  return { displayDate, sortDate: isoDate };
+};
+
 const extendReviews = (reviews, authors) => {
   const authorsById = _.keyBy(authors, ({ id }) => id);
   return reviews.map((review = {}) => {
@@ -8,10 +17,10 @@ const extendReviews = (reviews, authors) => {
     const author = authorsById[userId] || {};
     const isoDate = moment(new Date())
       .subtract(_.random(1095), 'days')
-      .format('YYYY-MM-DD');
+      .format(isoDateFormat);
     return {
       body,
-      date: moment(isoDate).format('MMM DD, YYYY'),
+      date: moment(isoDate).format(displayDateFormat),
       id,
       name: author.name || 'Some Name',
       order: isoDate,

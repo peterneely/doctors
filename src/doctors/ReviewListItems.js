@@ -19,7 +19,7 @@ class ReviewListItems extends Component {
     } = this.props;
     const reviews = _.chain(reviewsById)
       .map()
-      .take(20)
+      // .take(20)
       .orderBy(['order'], ['desc'])
       .value();
     return (

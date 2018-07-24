@@ -5,8 +5,13 @@ import Review from './Review';
 
 const EditReview = () => (
   <Doctor>
-    {({ goToReviews, review }) => (
-      <Review onCancel={goToReviews} review={review} />
+    {({ goToReviews, removeReview, review, updateReview }) => (
+      <Review
+        onCancel={goToReviews}
+        onUpdate={updateReview}
+        onRemove={removeReview}
+        review={review}
+      />
     )}
   </Doctor>
 );

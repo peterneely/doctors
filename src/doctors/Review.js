@@ -21,9 +21,15 @@ class Review extends Component {
     this.initState();
   }
 
+  handleAdd = () => this.submit(this.props.onAdd);
+
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
   };
+
+  handleRemove = () => this.submit(this.props.onRemove);
+
+  handleUpdate = () => this.submit(this.props.onUpdate);
 
   initState = () => {
     const { add, review = {} } = this.props;
@@ -36,12 +42,7 @@ class Review extends Component {
   };
 
   renderCommands = () => {
-    const {
-      add,
-      onCancel: handleCancel,
-      onRemove: handleRemove,
-      onUpdate: handleUpdate,
-    } = this.props;
+    const { add, onCancel: handleCancel } = this.props;
     return (
       <div style={styles.buttonsContainer}>
         <span style={styles.buttonContainer}>
@@ -56,18 +57,30 @@ class Review extends Component {
             <SecondaryButton
               ariaLabel="Remove"
               label="Remove"
-              onClick={handleRemove}
+              onClick={this.handleRemove}
             />
           </span>
         )}
-        <span style={styles.buttonContainer}>
-          <PrimaryButton
-            ariaLabel="Update"
-            label="Update"
-            onClick={handleUpdate}>
-            <ArrowIcon />
-          </PrimaryButton>
-        </span>
+        {!add && (
+          <span style={styles.buttonContainer}>
+            <PrimaryButton
+              ariaLabel="Update"
+              label="Update"
+              onClick={this.handleUpdate}>
+              <ArrowIcon />
+            </PrimaryButton>
+          </span>
+        )}
+        {add && (
+          <span style={styles.buttonContainer}>
+            <PrimaryButton
+              ariaLabel="Add Review"
+              label="Add Review"
+              onClick={this.handleAdd}>
+              <ArrowIcon />
+            </PrimaryButton>
+          </span>
+        )}
       </div>
     );
   };
@@ -104,6 +117,14 @@ class Review extends Component {
 
   renderTitle = () => <div style={styles.title}>{this.state.title}</div>;
 
+  submit = (action = () => {}) => {
+    const { onCancel: close = () => {}, review = {} } = this.props;
+    const { id } = review;
+    const { body, name } = this.state;
+    action({ body, id, name });
+    close();
+  };
+
   render() {
     return !this.state.loaded ? null : (
       <div style={styles.container}>
@@ -122,9 +143,10 @@ class Review extends Component {
 Review.propTypes = {
   add: PropTypes.bool,
   classes: PropTypes.object.isRequired,
+  onAdd: PropTypes.func,
   onCancel: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired,
-  onUpdate: PropTypes.func.isRequired,
+  onRemove: PropTypes.func,
+  onUpdate: PropTypes.func,
   review: PropTypes.object,
 };
 

@@ -4,6 +4,11 @@ import * as types from './types';
 export default function reduce(state = initialState, action) {
   const { payload, type } = action;
   switch (type) {
+    case types.ADD_REVIEW:
+      return {
+        ...state,
+        reviewsById: { ...state.reviewsById, [payload.id]: payload },
+      };
     case types.CLEAR_ACTIVE_DOCTOR:
       return { ...state, activeDoctor: {} };
     case types.SET_ACTIVE_DOCTOR:

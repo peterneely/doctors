@@ -107,7 +107,7 @@ export const review = {
   buttonsContainer: { textAlign: 'right' },
   container: { display: 'flex', margin: 25 },
   contentContainer: { flex: 3 },
-  input: { fontSize: '1.4em' },
+  input: { fontSize: '1.3em', lineHeight: '1.3em' },
   inputContainer: {
     border: borders.default,
     color: colors.listItemText,
