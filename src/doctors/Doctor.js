@@ -19,23 +19,14 @@ class Doctor extends Component {
     return _.isNumber(layoutHeight) ? layoutHeight - headerHeight : 'auto';
   };
 
-  setHeaderHeight = headerHeight => {
-    const { headerHeight: prevHeight } = this.state;
-    if (headerHeight !== prevHeight) this.setState({ headerHeight });
-  };
-
-  render() {
+  createViewModel = () => {
     const {
-      children,
-      doctor,
       match: { params },
       reviewsById,
     } = this.props;
-    if (!doctor.id) return null;
-    const contentHeight = this.calcContentHeight();
-    const viewModel = {
-      contentHeight,
-      goToNewReview: review => {
+    return {
+      contentHeight: this.calcContentHeight(),
+      goToNewReview: () => {
         go(`/${params.doctorId}/add-review`);
       },
       goToReview: review => {
@@ -47,10 +38,21 @@ class Doctor extends Component {
       review: reviewsById[params.reviewId],
       reviewsById,
     };
+  };
+
+  setHeaderHeight = headerHeight => {
+    const { headerHeight: prevHeight } = this.state;
+    if (headerHeight !== prevHeight) this.setState({ headerHeight });
+  };
+
+  render() {
+    const { children, doctor } = this.props;
+    if (!doctor.id) return null;
+    const viewModel = this.createViewModel();
     return (
       <div style={styles.container}>
         <DoctorHeader doctor={doctor} setHeight={this.setHeaderHeight} />
-        <div style={styles.contentContainer(contentHeight)}>
+        <div style={styles.contentContainer(viewModel.contentHeight)}>
           {children(viewModel)}
         </div>
       </div>

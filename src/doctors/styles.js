@@ -64,7 +64,7 @@ export const doctorHeader = (() => {
     title: {
       color: colors.detailTitle,
       fontSize: 36,
-      fontWeight: 'lighter',
+      // fontWeight: 'lighter',
       padding: '10px 0',
     },
   };
@@ -116,29 +116,35 @@ export const doctorListItems = {
 };
 
 export const review = {
-  author: { fontWeight: 'bold', margin: '15px 0' },
-  authorContainer: {
-    alignItems: 'flex-start',
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  body: {
-    color: colors.listItemText,
-    fontSize: '0.9em',
-    fontWeight: 'lighter',
-    lineHeight: '1.6em',
-    margin: '4px 0',
-  },
   button: {
     color: colors.listItemTitle,
     fontSize: '0.8em',
     fontWeight: 'lighter',
   },
-  container: { borderBottom: borders.default, padding: 20 },
-  date: {
+  container: { display: 'flex', margin: 25 },
+  contentContainer: { flex: 3 },
+  input: { fontSize: '1.4em' },
+  inputContainer: {
+    border: borders.default,
     color: colors.listItemText,
-    fontSize: '0.8em',
-    fontWeight: 'lighter',
+    marginBottom: 30,
+    padding: '15px 20px',
+    position: 'relative',
+  },
+  inputLabel: {
+    backgroundColor: 'white',
+    color: colors.listItemTitle,
+    left: 10,
+    padding: 10,
+    position: 'absolute',
+    top: -20,
+  },
+  rightMargin: { flex: 1 },
+  title: {
+    color: colors.detailTitle,
+    fontSize: '2em',
+    fontWeight: 'normal',
+    marginBottom: 20,
   },
 };
 
