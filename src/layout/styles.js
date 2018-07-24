@@ -1,4 +1,4 @@
-import { colors } from '../theme';
+import { borders, colors } from '../theme';
 
 export const defaultButton = {
   border: 'none',
@@ -7,6 +7,35 @@ export const defaultButton = {
   maxWidth: 190,
   minHeight: 50,
   minWidth: 100,
+};
+
+export const labeledInput = {
+  checkIcon: show => ({
+    color: colors.listItemTitle,
+    height: 36,
+    opacity: show ? 1 : 0,
+    position: 'absolute',
+    right: 15,
+    top: 15,
+    transition: 'opacity 0.2s ease',
+    width: 36,
+  }),
+  inputContainer: {
+    border: borders.default,
+    color: colors.listItemText,
+    marginBottom: 30,
+    padding: '15px 20px',
+    position: 'relative',
+  },
+  inputLabel: {
+    backgroundColor: 'white',
+    color: colors.listItemTitle,
+    left: 10,
+    padding: 10,
+    position: 'absolute',
+    top: -20,
+  },
+  inputProps: { style: { paddingRight: 45 } },
 };
 
 export const listItems = {

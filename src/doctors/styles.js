@@ -105,33 +105,9 @@ export const doctorListItems = {
 export const review = {
   buttonContainer: { marginLeft: 20 },
   buttonsContainer: { textAlign: 'right' },
-  checkIcon: show => ({
-    color: colors.listItemTitle,
-    opacity: show ? 1 : 0,
-    position: 'absolute',
-    right: 20,
-    top: 20,
-    transition: 'opacity 0.2s ease',
-  }),
   container: { display: 'flex', margin: 25 },
   contentContainer: { flex: 3 },
   input: { fontSize: '1.3em', lineHeight: '1.3em' },
-  inputContainer: {
-    border: borders.default,
-    color: colors.listItemText,
-    marginBottom: 30,
-    padding: '15px 20px',
-    position: 'relative',
-  },
-  inputLabel: {
-    backgroundColor: 'white',
-    color: colors.listItemTitle,
-    left: 10,
-    padding: 10,
-    position: 'absolute',
-    top: -20,
-  },
-  inputProps: { style: { paddingRight: 40 } },
   rightMargin: { flex: 1 },
   title: {
     color: colors.detailTitle,

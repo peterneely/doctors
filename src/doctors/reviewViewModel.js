@@ -1,7 +1,7 @@
 import moment from 'moment';
 import _ from 'lodash';
 
-const isoDateFormat = 'YYYY-MM-DD';
+const isoDateFormat = 'YYYY-MM-DD HH:mm:ss';
 const displayDateFormat = 'MMM DD, YYYY';
 
 export const formatDate = date => {

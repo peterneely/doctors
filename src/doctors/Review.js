@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ArrowIcon from '@material-ui/icons/ArrowForward';
-import CheckIcon from '@material-ui/icons/Check';
-import Input from '@material-ui/core/Input';
 import { withStyles } from '@material-ui/core/styles';
 import _ from 'lodash';
 
+import LabeledInput from '../layout/LabeledInput';
 import PrimaryButton from '../layout/PrimaryButton';
 import SecondaryButton from '../layout/SecondaryButton';
 import TertiaryButton from '../layout/TertiaryButton';
@@ -42,95 +41,78 @@ class Review extends Component {
     this.setState({ body, loaded: true, name, title });
   };
 
-  renderCheckmark = ({ valid: show }) => (
-    <CheckIcon style={styles.checkIcon(show)} />
-  );
-
-  renderCommands = () => {
+  createButtons = () => {
     const { add, onCancel: handleCancel } = this.props;
     const { body, name } = this.state;
     const canSubmit = !!body && !!name;
-    return (
-      <div style={styles.buttonsContainer}>
-        <span style={styles.buttonContainer}>
-          <TertiaryButton
-            ariaLabel="Cancel"
-            label="Cancel"
-            onClick={handleCancel}
-          />
-        </span>
-        {!add && (
-          <span style={styles.buttonContainer}>
-            <SecondaryButton
-              ariaLabel="Remove"
-              label="Remove"
-              onClick={this.handleRemove}
-            />
-          </span>
-        )}
-        {!add && (
-          <span style={styles.buttonContainer}>
-            <PrimaryButton
-              ariaLabel="Update"
-              disabled={!canSubmit}
-              label="Update"
-              onClick={this.handleUpdate}>
-              <ArrowIcon />
-            </PrimaryButton>
-          </span>
-        )}
-        {add && (
-          <span style={styles.buttonContainer}>
-            <PrimaryButton
-              ariaLabel="Add Review"
-              disabled={!canSubmit}
-              label="Add Review"
-              onClick={this.handleAdd}>
-              <ArrowIcon />
-            </PrimaryButton>
-          </span>
-        )}
-      </div>
-    );
+    return [
+      <TertiaryButton
+        ariaLabel="Cancel"
+        key="cancel"
+        label="Cancel"
+        onClick={handleCancel}
+      />,
+      add ? null : (
+        <SecondaryButton
+          ariaLabel="Remove"
+          label="Remove"
+          onClick={this.handleRemove}
+        />
+      ),
+      add ? null : (
+        <PrimaryButton
+          ariaLabel="Update"
+          disabled={!canSubmit}
+          label="Update"
+          onClick={this.handleUpdate}>
+          <ArrowIcon />
+        </PrimaryButton>
+      ),
+      !add ? null : (
+        <PrimaryButton
+          ariaLabel="Add Review"
+          disabled={!canSubmit}
+          label="Add Review"
+          onClick={this.handleAdd}>
+          <ArrowIcon />
+        </PrimaryButton>
+      ),
+    ];
   };
+
+  renderButtons = () => (
+    <div style={styles.buttonsContainer}>
+      {this.createButtons()
+        .filter(button => button)
+        .map((Button, index) => (
+          <span key={index} style={styles.buttonContainer}>
+            {Button}
+          </span>
+        ))}
+    </div>
+  );
 
   renderDisplayName = () => {
     const { name = '' } = this.state;
     return (
-      <div style={styles.inputContainer}>
-        <span style={styles.inputLabel}>Your display name</span>
-        <Input
-          className={this.props.classes.input}
-          disableUnderline
-          fullWidth
-          id="name"
-          inputProps={styles.inputProps}
-          onChange={this.handleChange('name')}
-          value={name}
-        />
-        {this.renderCheckmark({ valid: !!name })}
-      </div>
+      <LabeledInput
+        label="Your display name"
+        onChange={this.handleChange('name')}
+        value={name}
+      />
     );
   };
 
   renderReview = () => {
     const { body = '' } = this.state;
     return (
-      <div style={styles.inputContainer}>
-        <span style={styles.inputLabel}>Your review</span>
-        <Input
-          className={this.props.classes.input}
-          disableUnderline
-          fullWidth
-          id="body"
-          inputProps={styles.inputProps}
-          multiline
-          onChange={this.handleChange('body')}
-          rows="6"
-          value={body}
-        />
-        {this.renderCheckmark({ valid: !!body })}
-      </div>
+      <LabeledInput
+        label="Your review"
+        multiline
+        onChange={this.handleChange('body')}
+        rows="6"
+        value={body}
+      />
     );
   };
 
@@ -151,7 +133,7 @@ class Review extends Component {
           {this.renderTitle()}
           {this.renderReview()}
           {this.renderDisplayName()}
-          {this.renderCommands()}
+          {this.renderButtons()}
         </div>
         <div style={styles.rightMargin} />
       </div>
