@@ -9,16 +9,16 @@ import { defaultButton as commonClassStyles } from './styles';
 const classStyles = {
   button: {
     ...commonClassStyles,
-    '&:hover': { backgroundColor: colors.buttonSecondaryHoverLight },
+    '&:hover': { backgroundColor: colors.buttonTertiaryHover },
     backgroundColor: 'white',
-    border: `1px solid ${colors.buttonSecondary}`,
-    color: colors.buttonSecondary,
+    border: `1px solid ${colors.buttonTertiary}`,
+    color: colors.buttonTertiary,
   },
 };
 
 const styles = {
   buttonChildren: { paddingRight: 10 },
-  buttonLabel: { color: colors.buttonSecondary },
+  buttonLabel: { color: colors.buttonTertiary },
 };
 
 const TertiaryButton = ({ children, ...rest }) => {

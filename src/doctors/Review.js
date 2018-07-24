@@ -6,8 +6,8 @@ import _ from 'lodash';
 
 import LabeledInput from '../layout/LabeledInput';
 import PrimaryButton from '../layout/PrimaryButton';
-import SecondaryButton from '../layout/SecondaryButton';
 import TertiaryButton from '../layout/TertiaryButton';
+import SecondaryButton from '../layout/SecondaryButton';
 import { review as styles } from './styles';
 
 class Review extends Component {
@@ -46,14 +46,14 @@ class Review extends Component {
     const { body, name } = this.state;
     const canSubmit = !!body && !!name;
     return [
-      <TertiaryButton
+      <SecondaryButton
         ariaLabel="Cancel"
         key="cancel"
         label="Cancel"
         onClick={handleCancel}
       />,
       add ? null : (
-        <SecondaryButton
+        <TertiaryButton
           ariaLabel="Remove"
           label="Remove"
           onClick={this.handleRemove}
