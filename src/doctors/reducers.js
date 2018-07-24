@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import initialState from './initialState';
 import * as types from './types';
 
@@ -11,6 +12,15 @@ export default function reduce(state = initialState, action) {
       };
     case types.CLEAR_ACTIVE_DOCTOR:
       return { ...state, activeDoctor: {} };
+    case types.REMOVE_REVIEW:
+      return {
+        ...state,
+        reviewsById: (() => {
+          const newReviewsById = _.clone(state.reviewsById);
+          delete newReviewsById[payload];
+          return newReviewsById;
+        })(),
+      };
     case types.SET_ACTIVE_DOCTOR:
       return { ...state, activeDoctor: payload };
     case types.SET_DOCTORS_BY_ID_FAIL:

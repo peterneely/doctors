@@ -77,6 +77,11 @@ export const getReviews = ({ id: doctorId }) => {
   };
 };
 
+export const removeReview = ({ id }) => ({
+  payload: id,
+  type: types.REMOVE_REVIEW,
+});
+
 export const setActiveDoctor = (doctor = {}) => {
   return (dispatch, getState) => {
     const { doctors: { activeDoctor = {} } = {} } = getState();
