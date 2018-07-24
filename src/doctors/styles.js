@@ -2,12 +2,7 @@ import { borders, colors } from '../theme';
 
 export const doctor = {
   container: { borderLeft: borders.default },
-  contentContainer: height => ({
-    // flex: 3,
-    height,
-    // marginRight: 20,
-    // overflowY: 'scroll',
-  }),
+  contentContainer: height => ({ height }),
 };
 
 export const doctorHeader = (() => {
@@ -41,14 +36,7 @@ export const doctorHeader = (() => {
       padding: '18px 24px 24px',
       width: '100%',
     },
-    directionsButton: { color: 'white' },
     directionsIcon: { height: 50, width: 50 },
-    fab: {
-      '&:hover': { backgroundColor: colors.buttonPrimaryHover },
-      backgroundColor: colors.buttonPrimary,
-      height: 65,
-      width: 65,
-    },
     mainContainer: {
       alignItems: 'flex-start',
       display: 'flex',
@@ -64,7 +52,6 @@ export const doctorHeader = (() => {
     title: {
       color: colors.detailTitle,
       fontSize: 36,
-      // fontWeight: 'lighter',
       padding: '10px 0',
     },
   };
@@ -116,11 +103,8 @@ export const doctorListItems = {
 };
 
 export const review = {
-  button: {
-    color: colors.listItemTitle,
-    fontSize: '0.8em',
-    fontWeight: 'lighter',
-  },
+  buttonContainer: { marginLeft: 20 },
+  buttonsContainer: { textAlign: 'right' },
   container: { display: 'flex', margin: 25 },
   contentContainer: { flex: 3 },
   input: { fontSize: '1.4em' },
@@ -176,15 +160,9 @@ export const reviewListItem = {
 };
 
 export const reviewListItems = {
-  button: {
-    '&:hover': { backgroundColor: colors.buttonSecondaryHover },
-    backgroundColor: colors.buttonSecondary,
-  },
   commandContainer: { display: 'flex', flex: 1, height: 50, marginTop: 30 },
   commandMargin: { width: 48 },
   container: { display: 'flex' },
-  reviewButton: { color: 'white' },
-  reviewButtonLabel: { padding: '8px 15px' },
   reviewsContainer: height => ({
     flex: 3,
     height,

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
+import ArrowIcon from '@material-ui/icons/ArrowForward';
 import Input from '@material-ui/core/Input';
 import { withStyles } from '@material-ui/core/styles';
 import _ from 'lodash';
 
+import PrimaryButton from '../layout/PrimaryButton';
+import SecondaryButton from '../layout/SecondaryButton';
+import TertiaryButton from '../layout/TertiaryButton';
 import { review as styles } from './styles';
 
 class Review extends Component {
@@ -32,43 +35,83 @@ class Review extends Component {
     this.setState({ body, loaded: true, name, title });
   };
 
-  render() {
-    const { body, loaded, name, title } = this.state;
-    if (!loaded) return null;
-    const { classes, onCancel: handleCancel } = this.props;
+  renderCommands = () => {
+    const {
+      add,
+      onCancel: handleCancel,
+      onRemove: handleRemove,
+      onUpdate: handleUpdate,
+    } = this.props;
     return (
+      <div style={styles.buttonsContainer}>
+        <span style={styles.buttonContainer}>
+          <TertiaryButton
+            ariaLabel="Cancel"
+            label="Cancel"
+            onClick={handleCancel}
+          />
+        </span>
+        {!add && (
+          <span style={styles.buttonContainer}>
+            <SecondaryButton
+              ariaLabel="Remove"
+              label="Remove"
+              onClick={handleRemove}
+            />
+          </span>
+        )}
+        <span style={styles.buttonContainer}>
+          <PrimaryButton
+            ariaLabel="Update"
+            label="Update"
+            onClick={handleUpdate}>
+            <ArrowIcon />
+          </PrimaryButton>
+        </span>
+      </div>
+    );
+  };
+
+  renderDisplayName = () => (
+    <div style={styles.inputContainer}>
+      <span style={styles.inputLabel}>Your display name</span>
+      <Input
+        className={this.props.classes.input}
+        disableUnderline
+        fullWidth
+        id="name"
+        onChange={this.handleChange('name')}
+        value={this.state.name}
+      />
+    </div>
+  );
+
+  renderReview = () => (
+    <div style={styles.inputContainer}>
+      <span style={styles.inputLabel}>Your review</span>
+      <Input
+        className={this.props.classes.input}
+        disableUnderline
+        fullWidth
+        id="body"
+        multiline
+        onChange={this.handleChange('body')}
+        rows="6"
+        value={this.state.body}
+      />
+    </div>
+  );
+
+  renderTitle = () => <div style={styles.title}>{this.state.title}</div>;
+
+  render() {
+    return !this.state.loaded ? null : (
       <div style={styles.container}>
         <div style={styles.contentContainer}>
-          <div style={styles.title}>{title}</div>
-          <div style={styles.inputContainer}>
-            <span style={styles.inputLabel}>Your review</span>
-            <Input
-              className={classes.input}
-              disableUnderline
-              fullWidth
-              id="body"
-              multiline
-              onChange={this.handleChange('body')}
-              rows="6"
-              value={body}
-            />
-          </div>
-          <div style={styles.inputContainer}>
-            <span style={styles.inputLabel}>Your display name</span>
-            <Input
-              className={classes.input}
-              disableUnderline
-              fullWidth
-              id="name"
-              onChange={this.handleChange('name')}
-              value={name}
-            />
-          </div>
-          <div>
-            <Button className={classes.button} onClick={handleCancel}>
-              Cancel
-            </Button>
-          </div>
+          {this.renderTitle()}
+          {this.renderReview()}
+          {this.renderDisplayName()}
+          {this.renderCommands()}
         </div>
         <div style={styles.rightMargin} />
       </div>
@@ -80,6 +123,8 @@ Review.propTypes = {
   add: PropTypes.bool,
   classes: PropTypes.object.isRequired,
   onCancel: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
   review: PropTypes.object,
 };
 

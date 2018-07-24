@@ -8,8 +8,10 @@ const colorCodes = {
   grey: '#AAAAAA',
   lightTeal: '#D9F0EB',
   pink: '#FB646B',
+  pinkHoverLight: '#fff0f0',
   teal: '#64C5AF',
-  tealHover: '#83d1bf',
+  tealHover: '#92d6c7',
+  tealHoverLight: '#e6f6f2',
 };
 
 export const colors = {
@@ -19,6 +21,9 @@ export const colors = {
   buttonPrimaryHover: colorCodes.darkBlueHighlightHover,
   buttonSecondary: colorCodes.teal,
   buttonSecondaryHover: colorCodes.tealHover,
+  buttonSecondaryHoverLight: colorCodes.tealHoverLight,
+  buttonTertiary: colorCodes.pink,
+  buttonTertiaryHover: colorCodes.pinkHoverLight,
   cool: colorCodes.grey,
   detailTitle: colorCodes.darkBlueHighlight,
   hot: colorCodes.pink,

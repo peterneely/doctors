@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import DirectionsIcon from '@material-ui/icons/Directions';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import _ from 'lodash';
 
+import RoundIconButton from '../layout/RoundIconButton';
 import { doctorHeader as styles } from './styles';
 
 class DoctorHeader extends Component {
@@ -52,13 +52,9 @@ class DoctorHeader extends Component {
               <div style={styles.practiceType}>{practiceType}</div>
               <div style={styles.reviewCount}>{`${reviewCount} Reviews`}</div>
             </ListItemText>
-            <Button
-              aria-label="Directions"
-              className={classes.fab}
-              style={styles.directionsButton}
-              variant="fab">
+            <RoundIconButton ariaLabel="Directions">
               <DirectionsIcon style={styles.directionsIcon} />
-            </Button>
+            </RoundIconButton>
           </div>
           <ListItemText style={styles.addressContainer}>
             <div style={styles.addressLabel}>ADDRESS</div>

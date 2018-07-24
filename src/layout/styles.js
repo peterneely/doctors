@@ -1,5 +1,14 @@
 import { colors } from '../theme';
 
+export const defaultButton = {
+  border: 'none',
+  boxShadow: 'none',
+  color: 'white',
+  maxWidth: 190,
+  minHeight: 50,
+  minWidth: 100,
+};
+
 export const listItems = {
   container: height => ({
     flex: 1,
@@ -16,6 +25,16 @@ export const masterDetail = {
   },
   contentContainer: { display: 'flex' },
   detailContainer: { flex: 2 },
+};
+
+export const roundIconButton = {
+  fab: {
+    '&:hover': { backgroundColor: colors.buttonPrimaryHover },
+    backgroundColor: colors.buttonPrimary,
+    height: 65,
+    width: 65,
+  },
+  icon: { color: 'white' },
 };
 
 export const searchListItems = {

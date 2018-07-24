@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ArrowIcon from '@material-ui/icons/ArrowForward';
-import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import _ from 'lodash';
 
+import PrimaryButton from '../layout/PrimaryButton';
 import ReviewListItem from './ReviewListItem';
 import ScrollRestore from '../layout/ScrollRestore';
 import { reviewListItems as styles } from './styles';
@@ -12,7 +12,6 @@ import { reviewListItems as styles } from './styles';
 class ReviewListItems extends Component {
   render() {
     const {
-      classes,
       contentHeight,
       onAddReview: handleAddReview,
       onEditReview: handleEditReview,
@@ -37,16 +36,13 @@ class ReviewListItems extends Component {
           ))}
         </ScrollRestore>
         <div style={styles.commandContainer}>
-          <Button
-            aria-label="Leave review"
-            className={classes.button}
+          <PrimaryButton
+            ariaLabel="Leave review"
             fullWidth
-            onClick={handleAddReview}
-            style={styles.reviewButton}
-            variant="contained">
-            <span style={styles.reviewButtonLabel}>Leave review</span>
+            label="Leave review"
+            onClick={handleAddReview}>
             <ArrowIcon />
-          </Button>
+          </PrimaryButton>
           <div style={styles.commandMargin} />
         </div>
       </div>
