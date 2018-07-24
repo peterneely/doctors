@@ -107,7 +107,6 @@ export const review = {
   buttonsContainer: { textAlign: 'right' },
   container: { display: 'flex', margin: 25 },
   contentContainer: { flex: 3 },
-  input: { fontSize: '1.3em', lineHeight: '1.3em' },
   rightMargin: { flex: 1 },
   title: {
     color: colors.detailTitle,

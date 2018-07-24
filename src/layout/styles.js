@@ -20,6 +20,7 @@ export const labeledInput = {
     transition: 'opacity 0.2s ease',
     width: 36,
   }),
+  input: { fontSize: '1.3em', lineHeight: '1.3em' },
   inputContainer: {
     border: borders.default,
     color: colors.listItemText,
