@@ -105,6 +105,14 @@ export const doctorListItems = {
 export const review = {
   buttonContainer: { marginLeft: 20 },
   buttonsContainer: { textAlign: 'right' },
+  checkIcon: show => ({
+    color: colors.listItemTitle,
+    opacity: show ? 1 : 0,
+    position: 'absolute',
+    right: 20,
+    top: 20,
+    transition: 'opacity 0.2s ease',
+  }),
   container: { display: 'flex', margin: 25 },
   contentContainer: { flex: 3 },
   input: { fontSize: '1.3em', lineHeight: '1.3em' },

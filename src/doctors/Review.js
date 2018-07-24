@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ArrowIcon from '@material-ui/icons/ArrowForward';
+import CheckIcon from '@material-ui/icons/Check';
 import Input from '@material-ui/core/Input';
 import { withStyles } from '@material-ui/core/styles';
 import _ from 'lodash';
@@ -40,6 +41,10 @@ class Review extends Component {
     const title = add ? 'Provide your feedback' : 'Update your feedback';
     this.setState({ body, loaded: true, name, title });
   };
+
+  renderCheckmark = ({ valid: show }) => (
+    <CheckIcon style={styles.checkIcon(show)} />
+  );
 
   renderCommands = () => {
     const { add, onCancel: handleCancel } = this.props;
@@ -89,35 +94,43 @@ class Review extends Component {
     );
   };
 
-  renderDisplayName = () => (
-    <div style={styles.inputContainer}>
-      <span style={styles.inputLabel}>Your display name</span>
-      <Input
-        className={this.props.classes.input}
-        disableUnderline
-        fullWidth
-        id="name"
-        onChange={this.handleChange('name')}
-        value={this.state.name || ''}
-      />
-    </div>
-  );
+  renderDisplayName = () => {
+    const { name = '' } = this.state;
+    return (
+      <div style={styles.inputContainer}>
+        <span style={styles.inputLabel}>Your display name</span>
+        <Input
+          className={this.props.classes.input}
+          disableUnderline
+          fullWidth
+          id="name"
+          onChange={this.handleChange('name')}
+          value={name}
+        />
+        {this.renderCheckmark({ valid: !!name })}
+      </div>
+    );
+  };
 
-  renderReview = () => (
-    <div style={styles.inputContainer}>
-      <span style={styles.inputLabel}>Your review</span>
-      <Input
-        className={this.props.classes.input}
-        disableUnderline
-        fullWidth
-        id="body"
-        multiline
-        onChange={this.handleChange('body')}
-        rows="6"
-        value={this.state.body || ''}
-      />
-    </div>
-  );
+  renderReview = () => {
+    const { body = '' } = this.state;
+    return (
+      <div style={styles.inputContainer}>
+        <span style={styles.inputLabel}>Your review</span>
+        <Input
+          className={this.props.classes.input}
+          disableUnderline
+          fullWidth
+          id="body"
+          multiline
+          onChange={this.handleChange('body')}
+          rows="6"
+          value={body}
+        />
+        {this.renderCheckmark({ valid: !!body })}
+      </div>
+    );
+  };
 
   renderTitle = () => <div style={styles.title}>{this.state.title}</div>;
 
