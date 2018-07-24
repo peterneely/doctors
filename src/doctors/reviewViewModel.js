@@ -11,8 +11,10 @@ export const formatDate = date => {
 };
 
 const extendReviews = (reviews, authors) => {
-  const authorsById = _.keyBy(authors, ({ id }) => id);
-  return reviews.map((review = {}) => {
+  const limitedReviews = _.take(reviews, 20);
+  const limitedAuthors = _.take(authors, 20);
+  const authorsById = _.keyBy(limitedAuthors, ({ id }) => id);
+  return limitedReviews.map((review = {}) => {
     const { body, id, userId } = review;
     const author = authorsById[userId] || {};
     const isoDate = moment(new Date())
