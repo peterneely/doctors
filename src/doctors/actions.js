@@ -2,7 +2,7 @@ import _ from 'lodash';
 import * as repo from './repo';
 import * as types from './types';
 import { setMessage } from '../layout/actions';
-import { formatDate } from './reviewViewModel';
+import { formatDate } from '../services/dateUtils';
 
 export const addReview = ({ body, name }) => upsertReview({ body, name });
 

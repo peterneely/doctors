@@ -1,31 +1,25 @@
-import moment from 'moment';
 import _ from 'lodash';
 
-const isoDateFormat = 'YYYY-MM-DD HH:mm:ss';
-const displayDateFormat = 'MMM DD, YYYY';
-
-export const formatDate = date => {
-  const isoDate = moment(date).format(isoDateFormat);
-  const displayDate = moment(isoDate).format(displayDateFormat);
-  return { displayDate, sortDate: isoDate };
-};
+import { formatDate, getRandomDate } from '../services/dateUtils';
+import { getRandomIndexes } from '../services/numberUtils';
 
 const extendReviews = (reviews, authors) => {
-  const limitedReviews = _.take(reviews, 20);
-  const limitedAuthors = _.take(authors, 20);
-  const authorsById = _.keyBy(limitedAuthors, ({ id }) => id);
+  const limitedReviews = getRandomIndexes(20).reduce(
+    (chosenReviews, index) => [...chosenReviews, reviews[index]],
+    [],
+  );
+  const authorsById = _.keyBy(authors, ({ id }) => id);
   return limitedReviews.map((review = {}) => {
     const { body, id, userId } = review;
     const author = authorsById[userId] || {};
-    const isoDate = moment(new Date())
-      .subtract(_.random(1095), 'days')
-      .format(isoDateFormat);
+    const randomDate = getRandomDate({ date: new Date(), daysAgo: 1095 });
+    const { displayDate, sortDate } = formatDate(randomDate);
     return {
       body,
-      date: moment(isoDate).format(displayDateFormat),
+      date: displayDate,
       id,
       name: author.name || 'Some Name',
-      order: isoDate,
+      order: sortDate,
     };
   });
 };
