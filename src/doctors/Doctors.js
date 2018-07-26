@@ -2,13 +2,14 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import * as actions from './actions';
 import DoctorListItems from './DoctorListItems';
 import MasterDetail from '../layout/MasterDetail';
 import SearchListItems from '../layout/SearchListItems';
 
-class Doctors extends Component {
+export class Doctors extends Component {
   constructor(props) {
     super(props);
     props.actions.getDoctors();
@@ -20,11 +21,19 @@ class Doctors extends Component {
   };
 
   render() {
-    const { actions = {}, activeDoctor, children, doctorsById } = this.props;
+    const {
+      actions = {},
+      activeDoctor,
+      children,
+      doctorsById,
+      layoutHeight,
+      loading,
+    } = this.props;
     const { setActiveDoctor = () => {} } = actions;
     return (
       <Fragment>
         <MasterDetail
+          layoutHeight={layoutHeight}
           listItems={
             <DoctorListItems
               activeDoctor={activeDoctor}
@@ -33,6 +42,7 @@ class Doctors extends Component {
               setActiveDoctor={setActiveDoctor}
             />
           }
+          listItemsLoading={loading}
           search={
             <SearchListItems
               placeholder="Search doctors by name"
@@ -51,14 +61,18 @@ Doctors.propTypes = {
   activeDoctor: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
   doctorsById: PropTypes.object,
+  layoutHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  loading: PropTypes.bool,
   match: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => {
   const {
     doctors: { activeDoctor = {}, doctorsById = {} },
+    layout: { height: layoutHeight, message },
   } = state;
-  return { activeDoctor, doctorsById };
+  const loading = !_.size(doctorsById) && !message;
+  return { activeDoctor, doctorsById, layoutHeight, loading };
 };
 
 const mapDispatchToProps = dispatch => {
