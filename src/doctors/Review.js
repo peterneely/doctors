@@ -52,14 +52,14 @@ class Review extends Component {
         label="Cancel"
         onClick={handleCancel}
       />,
-      add ? null : (
+      !add && (
         <TertiaryButton
           ariaLabel="Remove"
           label="Remove"
           onClick={this.handleRemove}
         />
       ),
-      add ? null : (
+      !add && (
         <PrimaryButton
           ariaLabel="Update"
           disabled={!canSubmit}
@@ -68,7 +68,7 @@ class Review extends Component {
           <ArrowIcon />
         </PrimaryButton>
       ),
-      !add ? null : (
+      add && (
         <PrimaryButton
           ariaLabel="Add Review"
           disabled={!canSubmit}

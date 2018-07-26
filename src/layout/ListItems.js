@@ -21,8 +21,9 @@ class ListItems extends Component {
   };
 
   trySetActiveItem = () => {
-    const { activeItem = {}, idParamProp } = this.props;
     const {
+      activeItem = {},
+      idParamProp,
       itemsById,
       match: { params = {} },
       setActiveItem = () => {},
