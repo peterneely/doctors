@@ -33,14 +33,27 @@ class DoctorListItem extends Component {
         key={id}
         onClick={this.handleClick(doctor)}
         style={styles.container(active)}>
-        <Avatar alt={displayName} className={classes.bigAvatar} src={avatar} />
+        <Avatar
+          alt={displayName}
+          className={classes.bigAvatar}
+          id="js-avatar"
+          src={avatar}
+        />
         <ListItemText style={styles.textContainer}>
-          <div style={styles.displayName}>{displayName}</div>
-          <SmallChip label={ratingSummary} type={chipType} />
-          <span style={styles.practiceType}>{practiceType}</span>
+          <div id="js-display-name" style={styles.displayName}>
+            {displayName}
+          </div>
+          <SmallChip
+            id="js-rating-summary"
+            label={ratingSummary}
+            type={chipType}
+          />
+          <span id="js-practice-type" style={styles.practiceType}>
+            {practiceType}
+          </span>
           <div style={styles.text}>
-            <div>{addressLine1}</div>
-            <div>{`${reviewCount} Reviews`}</div>
+            <div id="js-address">{addressLine1}</div>
+            <div id="js-review-count">{`${reviewCount} Reviews`}</div>
           </div>
         </ListItemText>
         <ArrowIcon style={styles.arrowIcon} />

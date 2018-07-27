@@ -69,9 +69,9 @@ Doctors.propTypes = {
 const mapStateToProps = state => {
   const {
     doctors: { activeDoctor = {}, doctorsById = {} },
-    layout: { height: layoutHeight, message },
+    layout: { height: layoutHeight },
   } = state;
-  const loading = !_.size(doctorsById) && !message;
+  const loading = !_.size(doctorsById);
   return { activeDoctor, doctorsById, layoutHeight, loading };
 };
 
