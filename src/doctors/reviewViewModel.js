@@ -9,19 +9,22 @@ const extendReviews = (reviews, authors) => {
     [],
   );
   const authorsById = _.keyBy(authors, ({ id }) => id);
-  return limitedReviews.map((review = {}) => {
-    const { body, id, userId } = review;
-    const author = authorsById[userId] || {};
-    const randomDate = getRandomDate({ date: new Date(), daysAgo: 1095 });
-    const { displayDate, sortDate } = formatDate(randomDate);
-    return {
-      body,
-      date: displayDate,
-      id,
-      name: author.name || 'Some Name',
-      order: sortDate,
-    };
-  });
+  return _.chain(limitedReviews)
+    .map((review = {}) => {
+      const { body, userId } = review;
+      const author = authorsById[userId] || {};
+      const randomDate = getRandomDate({ date: new Date(), daysAgo: 1095 });
+      const { displayDate, sortDate } = formatDate(randomDate);
+      return {
+        body,
+        date: displayDate,
+        name: author.name || 'Some Name',
+        order: sortDate,
+      };
+    })
+    .orderBy(['order'])
+    .map((review, index) => ({ ...review, id: index + 1 }))
+    .value();
 };
 
 const toViewModel = (results = []) => {

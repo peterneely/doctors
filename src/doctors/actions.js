@@ -86,10 +86,18 @@ export const upsertReview = ({ body, id, name }) => {
     const review = {
       body,
       date: displayDate,
-      id: id || _.size(reviewsById) + 1,
+      id: id || getNextId(reviewsById),
       name,
       order: sortDate,
     };
     dispatch({ payload: review, type: types.UPSERT_REVIEW });
   };
+};
+
+const getNextId = reviewsById => {
+  const lastId = _.chain(reviewsById)
+    .map(({ id }) => id)
+    .max()
+    .value();
+  return lastId + 1;
 };
