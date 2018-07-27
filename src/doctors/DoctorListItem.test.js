@@ -2,15 +2,20 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import DoctorListItem from './DoctorListItem';
 
-it('Should show basic info', () => {
-  const item = shallow(
+const createListItem = (options = {}) => {
+  const { onClick = () => {} } = options;
+  return shallow(
     <DoctorListItem
       active={false}
       classes={{}}
       doctor={{ ratingSummary: '' }}
-      onClick={() => {}}
+      onClick={onClick}
     />,
   ).dive();
+};
+
+it('Should show basic info', () => {
+  const item = createListItem();
   const infoSelectors = [
     '#js-avatar',
     '#js-display-name',
@@ -22,4 +27,11 @@ it('Should show basic info', () => {
   infoSelectors.forEach(selector => {
     expect(item.find(selector).length).toEqual(1);
   });
+});
+
+it('Should show details when clicked', () => {
+  const onClick = jest.fn();
+  const item = createListItem({ onClick });
+  item.prop('onClick')();
+  expect(onClick.mock.calls.length).toEqual(1);
 });
