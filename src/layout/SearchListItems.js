@@ -10,11 +10,17 @@ import * as actions from './actions';
 import { searchListItems as styles } from './styles';
 
 const SearchListItems = props => {
-  const { actions = {}, placeholder = '', searchTerms, title } = props;
+  const {
+    actions = {},
+    placeholder = '',
+    searchTerms,
+    setHeight = () => {},
+    title,
+  } = props;
   const { setSearchTerms = () => {} } = actions;
   const handleSearch = event => setSearchTerms(event.target.value);
   return (
-    <div style={styles.container}>
+    <div ref={setHeight} style={styles.container}>
       <div style={styles.title}>{title}</div>
       <div style={styles.inputContainer}>
         <SearchIcon style={styles.icon} />
@@ -35,6 +41,7 @@ SearchListItems.propTypes = {
   actions: PropTypes.object.isRequired,
   placeholder: PropTypes.string,
   searchTerms: PropTypes.string.isRequired,
+  setHeight: PropTypes.func,
   title: PropTypes.string.isRequired,
 };
 

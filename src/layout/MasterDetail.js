@@ -1,28 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 
 import AlertMessage from './AlertMessage';
-import LayoutHeight from './LayoutHeight';
 import Loading from './Loading';
 import { masterDetail as styles } from './styles';
 
 const MasterDetail = props => {
   const {
     children,
-    layoutHeight,
     listItems: ListItems,
     listItemsLoading,
-    search: Search,
+    topNav: TopNav,
   } = props;
-  const loadingHeight = _.isNumber(layoutHeight)
-    ? layoutHeight - layoutHeight * 0.2
-    : layoutHeight;
   return (
     <div style={styles.container}>
-      {Search}
-      <LayoutHeight offset={100} />
-      <Loading height={loadingHeight} show={listItemsLoading} />
+      {TopNav}
+      <Loading show={listItemsLoading} />
       <div style={styles.contentContainer}>
         {ListItems}
         <div style={styles.detailContainer}>{children}</div>
@@ -34,10 +27,9 @@ const MasterDetail = props => {
 
 MasterDetail.propTypes = {
   children: PropTypes.node.isRequired,
-  layoutHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   listItems: PropTypes.node.isRequired,
   listItemsLoading: PropTypes.bool,
-  search: PropTypes.node.isRequired,
+  topNav: PropTypes.node.isRequired,
 };
 
 export default MasterDetail;

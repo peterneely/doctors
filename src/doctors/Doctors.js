@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -8,6 +8,7 @@ import * as actions from './actions';
 import DoctorListItems from './DoctorListItems';
 import MasterDetail from '../layout/MasterDetail';
 import SearchListItems from '../layout/SearchListItems';
+import Sizer from '../layout/Sizer';
 
 export class Doctors extends Component {
   constructor(props) {
@@ -26,32 +27,35 @@ export class Doctors extends Component {
       activeDoctor,
       children,
       doctorsById,
-      layoutHeight,
       loading,
+      offsetHeight,
     } = this.props;
     const { setActiveDoctor = () => {} } = actions;
     return (
-      <Fragment>
-        <MasterDetail
-          layoutHeight={layoutHeight}
-          listItems={
-            <DoctorListItems
-              activeDoctor={activeDoctor}
-              doctorsById={doctorsById}
-              hasDetail={this.hasDetail}
-              setActiveDoctor={setActiveDoctor}
-            />
-          }
-          listItemsLoading={loading}
-          search={
-            <SearchListItems
-              placeholder="Search doctors by name"
-              title="Doctors"
-            />
-          }>
-          <div>{children}</div>
-        </MasterDetail>
-      </Fragment>
+      <Sizer>
+        {({ setHeight }) => (
+          <MasterDetail
+            listItems={
+              <DoctorListItems
+                activeDoctor={activeDoctor}
+                doctorsById={doctorsById}
+                hasDetail={this.hasDetail}
+                offsetHeight={offsetHeight}
+                setActiveDoctor={setActiveDoctor}
+              />
+            }
+            listItemsLoading={loading}
+            topNav={
+              <SearchListItems
+                placeholder="Search doctors by name"
+                setHeight={setHeight('search')}
+                title="Doctors"
+              />
+            }>
+            <div>{children}</div>
+          </MasterDetail>
+        )}
+      </Sizer>
     );
   }
 }
@@ -61,18 +65,18 @@ Doctors.propTypes = {
   activeDoctor: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
   doctorsById: PropTypes.object,
-  layoutHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   loading: PropTypes.bool,
   match: PropTypes.object.isRequired,
+  offsetHeight: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => {
   const {
     doctors: { activeDoctor = {}, doctorsById = {} },
-    layout: { height: layoutHeight },
+    layout: { heights: { search: offsetHeight = 0 } = {} } = {},
   } = state;
   const loading = !_.size(doctorsById);
-  return { activeDoctor, doctorsById, layoutHeight, loading };
+  return { activeDoctor, doctorsById, loading, offsetHeight };
 };
 
 const mapDispatchToProps = dispatch => {

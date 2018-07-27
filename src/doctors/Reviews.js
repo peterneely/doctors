@@ -5,9 +5,9 @@ import ReviewListItems from './ReviewListItems';
 
 const Reviews = () => (
   <Doctor>
-    {({ contentHeight, goToNewReview, goToReview, reviewsById }) => (
+    {({ offsetHeight, goToNewReview, goToReview, reviewsById }) => (
       <ReviewListItems
-        contentHeight={contentHeight}
+        offsetHeight={offsetHeight}
         onAddReview={goToNewReview}
         onEditReview={goToReview}
         reviewsById={reviewsById}

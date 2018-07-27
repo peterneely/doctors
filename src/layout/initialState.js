@@ -1,5 +1,5 @@
 export default {
-  height: 'auto',
+  heights: {},
   message: '',
   messageType: '',
   scrollPositions: {},

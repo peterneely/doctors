@@ -34,11 +34,16 @@ class ListItems extends Component {
   };
 
   render() {
-    const { height, renderItem, scrollPositionId, style = {} } = this.props;
+    const {
+      offsetHeight = 0,
+      renderItem,
+      scrollPositionId,
+      style = {},
+    } = this.props;
     return (
       <ScrollRestore
         id={scrollPositionId}
-        style={{ ...styles.container(height), ...style }}>
+        style={{ ...styles.container(offsetHeight), ...style }}>
         <List style={styles.listContainer}>
           {this.filterItems().map(renderItem)}
         </List>
@@ -49,10 +54,10 @@ class ListItems extends Component {
 
 ListItems.propTypes = {
   activeItem: PropTypes.object.isRequired,
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   idParamProp: PropTypes.string.isRequired,
   itemsById: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
+  offsetHeight: PropTypes.number,
   renderItem: PropTypes.func.isRequired,
   scrollPositionId: PropTypes.string.isRequired,
   searchTerms: PropTypes.string.isRequired,
@@ -62,10 +67,10 @@ ListItems.propTypes = {
 
 const mapStateToProps = state => {
   const {
-    layout: { height = 'auto', searchTerms = '' },
+    layout: { searchTerms = '' },
     match = {},
   } = state;
-  return { height, match, searchTerms };
+  return { match, searchTerms };
 };
 
 export default connect(mapStateToProps)(withRouter(ListItems));

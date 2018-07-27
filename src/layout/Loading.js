@@ -2,22 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const createStyles = height => ({
-  alignItems: 'center',
-  display: 'flex',
-  height,
-  justifyContent: 'center',
-});
+import { loading as styles } from './styles';
 
-const Loading = ({ height, show }) =>
+const Loading = ({ show }) =>
   !show ? null : (
-    <div style={createStyles(height)}>
+    <div style={styles.container}>
       <CircularProgress size={50} />
     </div>
   );
 
 Loading.propTypes = {
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   show: PropTypes.bool,
 };
 

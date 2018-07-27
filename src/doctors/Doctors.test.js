@@ -5,7 +5,11 @@ import { Doctors } from './Doctors';
 it('Should load doctors when mounted', () => {
   const getDoctors = jest.fn();
   shallow(
-    <Doctors actions={{ getDoctors }} activeDoctor={{}} match={{}}>
+    <Doctors
+      actions={{ getDoctors }}
+      activeDoctor={{}}
+      match={{}}
+      offsetHeight={0}>
       <div />
     </Doctors>,
   );

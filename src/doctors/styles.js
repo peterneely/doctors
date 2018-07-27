@@ -1,8 +1,12 @@
 import { borders, colors } from '../theme';
+import { fullHeight } from '../services/styleUtils';
 
 export const doctor = {
   container: { borderLeft: borders.default },
-  contentContainer: height => ({ height }),
+  contentContainer: offsetHeight => ({
+    height: fullHeight(offsetHeight),
+    overflowY: 'scroll',
+  }),
 };
 
 export const doctorHeader = (() => {
@@ -105,7 +109,7 @@ export const doctorListItems = {
 export const review = {
   buttonContainer: { marginLeft: 20 },
   buttonsContainer: { textAlign: 'right' },
-  container: { display: 'flex', margin: 25 },
+  container: { display: 'flex', padding: 25 },
   contentContainer: { flex: 3 },
   rightMargin: { flex: 1 },
   title: {
@@ -147,9 +151,9 @@ export const reviewListItems = {
   commandContainer: { display: 'flex', flex: 1, height: 50, marginTop: 30 },
   commandMargin: { width: 48 },
   container: { display: 'flex' },
-  reviewsContainer: height => ({
+  reviewsContainer: offsetHeight => ({
     flex: 3,
-    height,
+    height: fullHeight(offsetHeight),
     marginRight: 20,
     overflowY: 'scroll',
   }),

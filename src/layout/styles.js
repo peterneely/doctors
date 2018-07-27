@@ -1,4 +1,5 @@
 import { borders, colors } from '../theme';
+import { fullHeight } from '../services/styleUtils';
 
 export const defaultButton = {
   border: 'none',
@@ -40,16 +41,26 @@ export const labeledInput = {
 };
 
 export const listItems = {
-  container: height => ({
+  container: offsetHeight => ({
     flex: 1,
-    height,
+    height: fullHeight(offsetHeight),
     overflowY: 'scroll',
   }),
   listContainer: { paddingTop: 0 },
 };
 
+export const loading = {
+  container: {
+    alignItems: 'center',
+    display: 'flex',
+    height: '70vh',
+    justifyContent: 'center',
+  },
+};
+
 export const masterDetail = {
   container: {
+    height: '100vh',
     margin: '0 auto',
     maxWidth: 1440,
   },

@@ -6,8 +6,11 @@ export default function reduce(state = initialState, action) {
   switch (type) {
     case types.CLEAR_MESSAGE:
       return { ...state, message: '', messageType: '' };
-    case types.SET_LAYOUT_HEIGHT:
-      return { ...state, height: payload };
+    case types.SET_HEIGHT:
+      return {
+        ...state,
+        heights: { ...state.heights, [payload.layoutAreaName]: payload.height },
+      };
     case types.SET_MESSAGE:
       return {
         ...state,

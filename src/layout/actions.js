@@ -2,10 +2,18 @@ import * as types from './types';
 
 export const clearMessage = () => ({ type: types.CLEAR_MESSAGE });
 
-export const setLayoutHeight = height => ({
-  payload: height,
-  type: types.SET_LAYOUT_HEIGHT,
-});
+export const setHeight = ({ height, layoutAreaName }) => {
+  return (dispatch, getState) => {
+    const {
+      layout: { heights: { [layoutAreaName]: prevHeight = 0 } = {} } = {},
+    } = getState();
+    if (height === prevHeight) return;
+    dispatch({
+      payload: { height, layoutAreaName },
+      type: types.SET_HEIGHT,
+    });
+  };
+};
 
 export const setMessage = ({ details, message, messageType }) => {
   // Can log details (errors) to some logging service.

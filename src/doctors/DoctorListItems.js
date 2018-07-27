@@ -30,6 +30,7 @@ class DoctorListItems extends Component {
       activeDoctor,
       doctorsById,
       hasDetail,
+      offsetHeight,
       setActiveDoctor,
     } = this.props;
     const showRightBorder = !!_.size(doctorsById) && !hasDetail();
@@ -38,6 +39,7 @@ class DoctorListItems extends Component {
         activeItem={activeDoctor}
         idParamProp="doctorId"
         itemsById={doctorsById}
+        offsetHeight={offsetHeight}
         renderItem={this.renderDoctorListItem}
         scrollPositionId="doctors"
         setActiveItem={setActiveDoctor}
@@ -51,6 +53,7 @@ DoctorListItems.propTypes = {
   activeDoctor: PropTypes.object.isRequired,
   doctorsById: PropTypes.object,
   hasDetail: PropTypes.func.isRequired,
+  offsetHeight: PropTypes.number.isRequired,
   setActiveDoctor: PropTypes.func.isRequired,
 };
 
